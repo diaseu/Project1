@@ -28,7 +28,6 @@ document.getElementById('search').addEventListener('click', event => {
             </div>
           </div>
         `
-        console.log(data.businesses[i].image_url)
       }
     })
     .catch(err => console.error(err))
