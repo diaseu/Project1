@@ -11,7 +11,7 @@ document.getElementById('search').addEventListener('click', event => {
   })
     .then(({ data }) => {
       for (let i = 0; i < 5; i++) {
-        let restName = data.businesses[i].alias
+        let restName = data.businesses[i].name
         document.getElementById('restaurantResults').innerHTML += `
         <div class="row mt-3">
             <div class="col s3">
@@ -27,7 +27,7 @@ document.getElementById('search').addEventListener('click', event => {
             </div>
           </div>
         `
-        console.log(data.businesses[i].alias)
+        console.log(data.businesses[i].name)
       }
     })
     .catch(err => console.error(err))
