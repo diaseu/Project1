@@ -3,6 +3,10 @@
   max-width: none;
 }
 
+/* Margins */
+.mb-0 {
+  margin-bottom: 0;
+}
 .mb-3 {
   margin-bottom: 3rem;
 }
@@ -10,15 +14,23 @@
   margin-bottom: 6rem;
 }
 
+.mt-0 {
+  margin-top: 0;
+}
 .mt-3 {
   margin-top: 3rem;
 }
-
 .mt-6 {
   margin-top: 6rem;
 }
 
+/* Headings */
 h3 {
   margin: 0;
   line-height: 100%;
+}
+
+/* General Styles */
+.caps {
+  text-transform: uppercase;
 }
