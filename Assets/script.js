@@ -13,6 +13,9 @@ document.getElementById('search').addEventListener('click', event => {
       $('#restaurantResults').html('')
       for (let i = 0; i < 5; i++) {
         let restName = data.businesses[i].name, address = data.businesses[i].location.display_address, phone = data.businesses[i].phone, price = data.businesses[i].price, rating = data.businesses[i].rating, imgSrc = data.businesses[i].image_url
+        if (phone === '') {
+          phone = 'No phone number'
+        }
         document.getElementById('restaurantResults').innerHTML += `
         <div class="row mt-3">
             <div class="col s3">
