@@ -34,4 +34,18 @@ document.getElementById('search').addEventListener('click', event => {
       }
     })
     .catch(err => console.error(err))
+  axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=${cuisine}&apiKey=8f5b3f3b103643d88ebc4def081beb88`)
+    .then(({ data }) => {
+      for (let i=0; i<5; i++){
+         let recId = data.results[i].id
+        axios.get(`https://api.spoonacular.com/recipes/${recId}/information?apiKey=8f5b3f3b103643d88ebc4def081beb88&includeNutrition=true`)
+        .then(res=> {
+          console.log(res.data)
+        })
+        .catch(err => console.error(err))
+
+      }
+      
+    })
+    .catch (err => console.error(err))
 })
