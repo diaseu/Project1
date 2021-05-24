@@ -1,5 +1,6 @@
 document.getElementById('search').addEventListener('click', event => {
   event.preventDefault()
+  $('#main').show()
   let zipcode = document.getElementById('location').value, cuisine = document.getElementById('cuisine').value
   axios.get('https://cors-proxy-j.herokuapp.com/', {
     headers: {
