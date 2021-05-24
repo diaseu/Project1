@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project 1</title>
+  <link rel="stylesheet" href="./Assets/reset.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="./Assets/style.css">
+</head>
+
+<body>
+
+  <header>
+    <nav class="teal darken-2 row">
+      <div class="col s6 m2"><span class="material-icons">local_dining</span> Favorites</div>
+      <div class="col s12 m1 offset-m2">
+        <a href="index.html" class="right">Home</a>
+      </div>
+    </nav>
+  </header>
+  <div id="main"></div>
+  <script>
+    let favorites = localStorage.getItem(JSON.parse('favorites'))
+    for (i=0; i<favorites.length; i++){
+      document.getElementById('main').innerHTML +=`
+        <div class="row mt-3">
+          <div class="col s3">
+            <img src="${favorites[i].imgSrc}" class="responsive-img" alt="${favorites[i].res.title}">
+          </div>
+          <div class="col s9">
+             <h3 class="mb-1">${favorites[i].res.data.title} </h2>
+             <p>glutenfree? ${favorites[i].glutenFreeDisplay} </p>
+             <p class="mb-3">servings: ${favorites[i].res.data.servings} </p>
+
+             <p></p>
+             <p class="mb-3">Price per serving: ${favorites[i].price}$</p>
+           </div>
+         </div>
+      `
+
+    }
+  </script>
+</body>
