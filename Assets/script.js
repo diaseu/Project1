@@ -11,19 +11,19 @@ document.getElementById('search').addEventListener('click', event => {
   })
     .then(({ data }) => {
       for (let i = 0; i < 5; i++) {
-        let restName = data.businesses[i].name
+        let restName = data.businesses[i].name, address = data.businesses[i].location.display_address, phone = data.businesses[i].phone, price = data.businesses[i].price, rating = data.businesses[i].rating
         document.getElementById('restaurantResults').innerHTML += `
         <div class="row mt-3">
             <div class="col s3">
               <img src="https://dummyimage.com/200x200/666/fff.jpg&text=rest" >
             </div>
             <div class="col s9">
-              <h3 class="mb-1">${restName}</h2>
-              <p>Address: 1234 Candy Cane Rd, Snowland, CA 92222</p>
-              <p class="mb-3">Phone Number: 17141234567</p>
+              <h3 class="mb-1"> ${restName}</h2>
+              <p>Address: ${address}</p>
+              <p class="mb-3"> phone: ${phone}</p>
 
-              <p>Rating: # (# reviews)</p>
-              <p class="mb-3">Price: $</p>
+              <p>Rating: ${rating}</p>
+              <p class="mb-3">Price: ${price}</p>
             </div>
           </div>
         `
