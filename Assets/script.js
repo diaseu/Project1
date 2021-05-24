@@ -16,6 +16,9 @@ document.getElementById('search').addEventListener('click', event => {
         if (phone === '') {
           phone = 'No phone number'
         }
+        if (!data.businesses[i].hasOwnProperty('price')) {
+          price = 'No price available'
+        }
         document.getElementById('restaurantResults').innerHTML += `
         <div class="row mt-3">
             <div class="col s3">
