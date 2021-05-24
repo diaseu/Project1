@@ -27,7 +27,7 @@ document.getElementById('search').addEventListener('click', event => {
             </div>
           </div>
         `
-        console.log(data.businesses[i].rating)
+        console.log(data.businesses[i].name)
       }
     })
     .catch(err => console.error(err))
