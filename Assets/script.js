@@ -11,11 +11,11 @@ document.getElementById('search').addEventListener('click', event => {
   })
     .then(({ data }) => {
       for (let i = 0; i < 5; i++) {
-        let restName = data.businesses[i].name, address = data.businesses[i].location.display_address, phone = data.businesses[i].phone, price = data.businesses[i].price, rating = data.businesses[i].rating
+        let restName = data.businesses[i].name, address = data.businesses[i].location.display_address, phone = data.businesses[i].phone, price = data.businesses[i].price, rating = data.businesses[i].rating, imgSrc = data.businesses[i].image_url
         document.getElementById('restaurantResults').innerHTML += `
         <div class="row mt-3">
             <div class="col s3">
-              <img src="https://dummyimage.com/200x200/666/fff.jpg&text=rest" >
+              <img src="${imgSrc}" >
             </div>
             <div class="col s9">
               <h3 class="mb-1"> ${restName}</h2>
@@ -27,7 +27,7 @@ document.getElementById('search').addEventListener('click', event => {
             </div>
           </div>
         `
-        console.log(data.businesses[i].rating)
+        console.log(data.businesses[i].image_url)
       }
     })
     .catch(err => console.error(err))
