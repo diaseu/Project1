@@ -15,7 +15,7 @@ document.getElementById('search').addEventListener('click', event => {
         document.getElementById('restaurantResults').innerHTML += `
         <div class="row mt-3">
             <div class="col s3">
-              <img src="${imgSrc}" >
+              <img src="${imgSrc}" class='responsive-img'>
             </div>
             <div class="col s9">
               <h3 class="mb-1"> ${restName}</h2>
