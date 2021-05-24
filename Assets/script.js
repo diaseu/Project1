@@ -43,7 +43,13 @@ document.getElementById('search').addEventListener('click', event => {
          let recId = data.results[i].id
         axios.get(`https://api.spoonacular.com/recipes/${recId}/information?apiKey=8f5b3f3b103643d88ebc4def081beb88&includeNutrition=true`)
         .then(res=> {
-          let price = Math.round(100*(res.data.pricePerServing/100))/100, imgSrc = res.data.image, recipe = res.data.instructions, time = res.data.readyInMinutes
+          let price = Math.round(100 * (res.data.pricePerServing / 100)) / 100, imgSrc = res.data.image, recipe = res.data.instructions, time = res.data.readyInMinutes, glutenFree = res.data.glutenFree ? true: false, glutenFreeDisplay = ''
+          if (glutenFree) {
+            glutenFreeDisplay = '✓'
+          }
+          else {
+            glutenFreeDisplay = 'X'
+          }
           document.getElementById('recipeResults').innerHTML += `
             <div class="row mt-3">
                 <div class="col s3">
@@ -51,7 +57,7 @@ document.getElementById('search').addEventListener('click', event => {
                 </div>
                 <div class="col s9">
                   <h3 class="mb-1">${res.data.title} </h2>
-                  <p>glutenfree? ${res.data.glutenFree} </p>
+                  <p>glutenfree? ${glutenFreeDisplay} </p>
                   <p class="mb-3">servings: ${res.data.servings} </p>
 
                   <p></p>
