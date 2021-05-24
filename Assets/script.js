@@ -23,7 +23,7 @@ document.getElementById('search').addEventListener('click', event => {
         document.getElementById('restaurantResults').innerHTML += `
         <div class="row mt-3">
             <div class="col s3">
-              <img src="${imgSrc}" class='responsive-img'>
+              <img src="${imgSrc}" class="responsive-img" alt="${restName}">
             </div>
             <div class="col s9">
               <h3 class="mb-1"> ${restName}</h2>
@@ -54,7 +54,7 @@ document.getElementById('search').addEventListener('click', event => {
           document.getElementById('recipeResults').innerHTML += `
             <div class="row mt-3">
                 <div class="col s3">
-                  <img src="${imgSrc}" class='responsive-img'>
+                  <img src="${imgSrc}" class="responsive-img" alt="${res.data.title}">
                 </div>
                 <div class="col s9">
                   <h3 class="mb-1">${res.data.title} </h2>
