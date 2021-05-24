@@ -3,6 +3,10 @@
   max-width: none;
 }
 
+.card h4 {
+  margin: 0 0 1em 0;
+}
+
 /* Margins */
 .mb-0 {
   margin-bottom: 0;
