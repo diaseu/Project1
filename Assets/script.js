@@ -129,7 +129,7 @@ document.getElementById('search').addEventListener('click', event => {
                 </div>
                 <div class="card-action">
                   <a href="#" data-target="#recipe${i}" class="modal-trigger">See Recipe</a>
-                  <a href=""><span class="material-icons right">bookmark_border</span></a>
+                  <a href=""><span data-value='${recId}' class="material-icons right addToFavoritesRecipe">bookmark_border</span></a>
 
                 </div>
               </div>
@@ -162,5 +162,18 @@ document.addEventListener('click', event => {
   if (event.target.className === 'modal-trigger') {
     let instance = M.Modal.getInstance(document.querySelector(event.target.dataset.target))
     instance.open()
+  }
+})
+
+function addToFavs(recID) {
+  let FavRest = JSON.parse(localStorage.getItem('favRest')) || []
+  FavRest.push(recID)
+  console.log(recID)
+  localStorage.setItem('favRest', JSON.stringify(FavRest))
+}
+document.addEventListener('click', event => {
+  event.preventDefault()
+  if (event.target.classList.contains('addToFavoritesRecipe')){
+    addToFavs(event.target.dataset.value)
   }
 })
