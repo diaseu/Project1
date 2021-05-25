@@ -3,6 +3,10 @@
   max-width: none;
 }
 
+.card-image .responsive-img {
+  max-height: 18vh;
+}
+
 .card h4 {
   margin: 0 0 1em 0;
 }

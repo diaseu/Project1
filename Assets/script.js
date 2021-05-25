@@ -42,6 +42,11 @@ document.getElementById('search').addEventListener('click', event => {
                   <p><strong>Rating</strong>: ${rating}</p>
                   <p><strong>Price</strong>: ${price}</p>
                 </div>
+                <div class="card-action">
+                  
+                  <a href=""><span class="material-icons right">bookmark_border</span></a>
+
+                </div>
               </div>
             </div>
           </div>
@@ -51,11 +56,11 @@ document.getElementById('search').addEventListener('click', event => {
       }
     })
     .catch(err => console.error(err))
-  axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=${cuisine}&apiKey=794d04dc9b2941a7ae833658031148f5`)
+  axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=${cuisine}&apiKey=8f5b3f3b103643d88ebc4def081beb88`)
     .then(({ data }) => {
       for (let i = 0; i < 5; i++) {
         let recId = data.results[i].id
-        axios.get(`https://api.spoonacular.com/recipes/${recId}/information?apiKey=794d04dc9b2941a7ae833658031148f5&includeNutrition=true`)
+        axios.get(`https://api.spoonacular.com/recipes/${recId}/information?apiKey=8f5b3f3b103643d88ebc4def081beb88&includeNutrition=true`)
           .then(res => {
             let price = Math.round(100 * (res.data.pricePerServing / 100)) / 100, imgSrc = res.data.image, recipe = res.data.instructions, time = res.data.readyInMinutes, glutenFree = res.data.glutenFree ? true : false, glutenFreeDisplay = ''
             if (glutenFree) {
