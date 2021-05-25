@@ -42,38 +42,55 @@ document.getElementById('search').addEventListener('click', event => {
     .catch(err => console.error(err))
   axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=${cuisine}&apiKey=794d04dc9b2941a7ae833658031148f5`)
     .then(({ data }) => {
-      for (let i=0; i<5; i++){
-         let recId = data.results[i].id
+      for (let i = 0; i < 5; i++) {
+        let recId = data.results[i].id
         axios.get(`https://api.spoonacular.com/recipes/${recId}/information?apiKey=794d04dc9b2941a7ae833658031148f5&includeNutrition=true`)
-        .then(res=> {
-          let price = Math.round(100 * (res.data.pricePerServing / 100)) / 100, imgSrc = res.data.image, recipe = res.data.instructions, time = res.data.readyInMinutes, glutenFree = res.data.glutenFree ? true: false, glutenFreeDisplay = ''
-          if (glutenFree) {
-            glutenFreeDisplay = '✓'
-          }
-          else {
-            glutenFreeDisplay = 'X'
-          }
-          document.getElementById('recipeResults').innerHTML += `
-            <div class="row mt-3">
-                <div class="col s3">
-                  <img src="${imgSrc}" class="responsive-img" alt="${res.data.title}">
+          .then(res => {
+            let price = Math.round(100 * (res.data.pricePerServing / 100)) / 100, imgSrc = res.data.image, recipe = res.data.instructions, time = res.data.readyInMinutes, glutenFree = res.data.glutenFree ? true : false, glutenFreeDisplay = ''
+            if (glutenFree) {
+              glutenFreeDisplay = '✅'
+            }
+            else {
+              glutenFreeDisplay = 'X'
+            }
+            document.getElementById('recipeResults').innerHTML += `
+          <div class="col s12 m11">
+            <div class="card horizontal">
+              <div class="card-image">
+                <img src="${imgSrc}" class="responsive-img" alt="${res.data.title}">
+              </div>
+              <div class="card-stacked">
+                <div class="card-content">
+                  <h4 class="header">${res.data.title}</h4>
+                  <p>Gluten-Free: ✅ ${glutenFreeDisplay}</p>
+                  <p>Servings: ${res.data.servings}</p>
+                  <p>Price: $${price}/serving</p>
                 </div>
-                <div class="col s9">
-                  <h3 class="mb-1">${res.data.title} </h2>
-                  <p>glutenfree? ${glutenFreeDisplay} </p>
-                  <p class="mb-3">servings: ${res.data.servings} </p>
+                <div class="card-action">
+                  <a href="#recipe${i}" class="modal-trigger">See Recipe</a>
+                  <a href=""><span class="material-icons right">bookmark_border</span></a>
 
-                  <p></p>
-                  <p class="mb-3">Price per serving: ${price}$</p>
                 </div>
               </div>
+            </div>
+          </div>
+                    
+            <div id="recipe${i}" class="modal modal-fixed-footer">
+              <div class="modal-content">
+                <h4>${res.data.title}</h4>
+                <p>${res.data.instructions}</p>
+              </div>
+              <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+              </div>
+            </div>
             `
-          console.log(res.data)
-        })
-        .catch(err => console.error(err))
+            console.log(res.data)
+          })
+          .catch(err => console.error(err))
 
       }
-      
+
     })
-    .catch (err => console.error(err))
+    .catch(err => console.error(err))
 })
