@@ -122,8 +122,13 @@ document.addEventListener('click', event => {
 
 function addToFavs(recID) {
   let FavRec = JSON.parse(localStorage.getItem('favRec')) || []
-  FavRec.push(recID)
-  console.log(recID)
+  let alreadyExists = false
+  for (let i=0; i<FavRec.length; i++){
+    if (FavRec[i]==recID){alreadyExists = true}
+  }
+  if (alreadyExists == false){
+    FavRec.push(recID)
+  }
   localStorage.setItem('favRec', JSON.stringify(FavRec))
 }
 document.addEventListener('click', event => {
