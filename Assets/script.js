@@ -1,5 +1,10 @@
 $('#main').show()
 
+document.addEventListener('DOMContentLoaded', function () {
+  var elems = document.querySelectorAll('.modal');
+  var instances = M.Modal.init(elems, {});
+});
+
 document.getElementById('search').addEventListener('click', event => {
   event.preventDefault()
   $('#main').show()
@@ -67,7 +72,7 @@ document.getElementById('search').addEventListener('click', event => {
                   <p>Price: $${price}/serving</p>
                 </div>
                 <div class="card-action">
-                  <a href="#recipe${i}" class="modal-trigger">See Recipe</a>
+                  <a href="#" data-target="#recipe${i}" class="modal-trigger">See Recipe</a>
                   <a href=""><span class="material-icons right">bookmark_border</span></a>
 
                 </div>
@@ -86,6 +91,8 @@ document.getElementById('search').addEventListener('click', event => {
             </div>
             `
             console.log(res.data)
+            var elems = document.querySelectorAll('.modal');
+            var instances = M.Modal.init(elems, {})
           })
           .catch(err => console.error(err))
 
@@ -93,4 +100,11 @@ document.getElementById('search').addEventListener('click', event => {
 
     })
     .catch(err => console.error(err))
+})
+
+document.addEventListener('click', event => {
+  if (event.target.className === 'modal-trigger') {
+    let instance = M.Modal.getInstance(document.querySelector(event.target.dataset.target))
+    instance.open()
+  }
 })

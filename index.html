@@ -46,41 +46,6 @@
         <!-- Restaurant Results  -->
         <div id="restaurantResults">
 
-          <!-- Card Test -->
-          <div class="col s12 m11">
-            <div class="card horizontal">
-              <div class="card-image">
-                <img src="https://dummyimage.com/250x250/999/fff.png&text=test" class="responsive-img" alt="${res.data.title}">
-              </div>
-              <div class="card-stacked">
-                <div class="card-content">
-                  <h4 class="header">${res.data.title}</h4>
-                  <p>Gluten-Free: ✅ ${glutenFreeDisplay}</p>
-                  <p>Servings: ${res.data.servings}</p>
-                  <p>Price: $${price}/serving</p>
-                </div>
-                <div class="card-action">
-                  <a href="#resTest" class="modal-trigger">See Recipe</a>
-                  <a href=""><span class="material-icons right">bookmark_border</span></a>
-          
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- End Card Test -->
-          
-          <!-- Start Modal Test -->
-          <div id="resTest" class="modal modal-fixed-footer">
-            <div class="modal-content">
-              <h4>${res.data.title}</h4>
-              <p>${res.data.instructions}</p>
-            </div>
-            <div class="modal-footer">
-              <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
-            </div>
-          </div>
-          <!-- End Modal Test -->
-
         </div>
       <!-- End of Restaurant Side -->
       </div>
@@ -92,40 +57,6 @@
 
         <!-- Recipes Results  -->
         <div id="recipeResults">
-          <!-- Card Test -->
-          <div class="col s12 m11">
-            <div class="card horizontal">
-              <div class="card-image">
-                <img src="https://dummyimage.com/250x250/999/fff.png&text=test" class="responsive-img" alt="${res.data.title}">
-              </div>
-              <div class="card-stacked">
-                <div class="card-content">
-                  <h4 class="header">${res.data.title}</h4>
-                  <p>Gluten-Free: ✅ ${glutenFreeDisplay}</p>
-                  <p>Servings: ${res.data.servings}</p>
-                  <p>Price: $${price}/serving</p>
-                </div>
-                <div class="card-action">
-                  <a href="#recTest" class="modal-trigger">See Recipe</a>
-                  <a href=""><span class="material-icons right">bookmark_border</span></a>
-
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- End Card Test -->
-
-          <!-- Start Modal Test -->
-            <div id="recTest" class="modal modal-fixed-footer">
-              <div class="modal-content">
-                <h4>${res.data.title}</h4>
-                <p>${res.data.instructions}</p>
-              </div>
-              <div class="modal-footer">
-                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
-              </div>
-            </div>
-          <!-- End Modal Test -->
 
         </div>
       <!-- End of Recipe Side -->
@@ -140,10 +71,5 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="./Assets/script.js"></script>
-  <script>
-        $(document).ready(function () {
-          $('.modal').modal();
-        });
-  </script>
 </body>
 </html>
