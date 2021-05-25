@@ -127,6 +127,7 @@ function addToFavs(recID) {
   localStorage.setItem('favRest', JSON.stringify(FavRest))
 }
 document.addEventListener('click', event => {
+  event.preventDefault()
   if (event.target.classList.contains('addToFavoritesRecipe')){
     addToFavs(event.target.dataset.value)
   }

@@ -26,54 +26,7 @@
   <script>
     let favorites = localStorage.getItem(JSON.parse('favorites'))
     for (i=0; i<favorites.length; i++){
-      axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=${favorites[i]}&apiKey=8f5b3f3b103643d88ebc4def081beb88`)
-        .then(({ data }) => {
-            let recId = data.results.id
-            axios.get(`https://api.spoonacular.com/recipes/${recId}/information?apiKey=8f5b3f3b103643d88ebc4def081beb88&includeNutrition=true`)
-              .then(res => {
-                let price = Math.round(100 * (res.data.pricePerServing / 100)) / 100, imgSrc = res.data.image, recipe = res.data.instructions, time = res.data.readyInMinutes, glutenFree = res.data.glutenFree ? true : false, glutenFreeDisplay = ''
-                if (glutenFree) {
-                  glutenFreeDisplay = '✅'
-                }
-                else {
-                  glutenFreeDisplay = 'X'
-                }
-                document.getElementById('main').innerHTML += `
-                 <div class="col s12 m11">
-                  <div class="card horizontal">
-                    <div class="card-image">
-                      <img src="${imgSrc}" class="responsive-img" alt="${res.data.title}">
-                  </div>
-                  <div class="card-stacked">
-                  <div class="card-content">
-                  <h4 class="header">${res.data.title}</h4>
-                  <p>Gluten-Free: ✅ ${glutenFreeDisplay}</p>
-                  <p>Servings: ${res.data.servings}</p>
-                  <p>Price: $${price}/serving</p>
-                  </div>
-                  <div class="card-action">
-                  <a href="#recipe${i}" class="modal-trigger">See Recipe</a>
-                  <a href=""><span class="material-icons right">bookmark_border</span></a>
-
-                </div>
-              </div>
-            </div>
-          </div>
-                    
-            <div id="recipe${i}" class="modal modal-fixed-footer">
-              <div class="modal-content">
-                <h4>${res.data.title}</h4>
-                <p>${res.data.instructions}</p>
-              </div>
-              <div class="modal-footer">
-                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
-              </div>
-            </div>
-            `
-              })
-              .catch(err => console.error(err))
-          })
-          .catch (err => console.error(err))
+      
       }
       // document.getElementById('main').innerHTML +=`
       //   <div class="row mt-3">
