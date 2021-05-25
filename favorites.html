@@ -23,37 +23,35 @@
     </nav>
   </header>
   <div id="main"></div>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
-    let favorites = localStorage.getItem(JSON.parse('favorites'))
+    let favorites = JSON.parse(localStorage.getItem('favRec'))
     for (i=0; i<favorites.length; i++){
-      axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=${favorites[i]}&apiKey=8f5b3f3b103643d88ebc4def081beb88`)
-        .then(({ data }) => {
-            let recId = data.results.id
-            axios.get(`https://api.spoonacular.com/recipes/${recId}/information?apiKey=8f5b3f3b103643d88ebc4def081beb88&includeNutrition=true`)
-              .then(res => {
-                let price = Math.round(100 * (res.data.pricePerServing / 100)) / 100, imgSrc = res.data.image, recipe = res.data.instructions, time = res.data.readyInMinutes, glutenFree = res.data.glutenFree ? true : false, glutenFreeDisplay = ''
-                if (glutenFree) {
-                  glutenFreeDisplay = '✅'
-                }
-                else {
-                  glutenFreeDisplay = 'X'
-                }
-                document.getElementById('main').innerHTML += `
-                 <div class="col s12 m11">
-                  <div class="card horizontal">
-                    <div class="card-image">
-                      <img src="${imgSrc}" class="responsive-img" alt="${res.data.title}">
-                  </div>
-                  <div class="card-stacked">
-                  <div class="card-content">
+      axios.get(`https://api.spoonacular.com/recipes/${favorites[i]}/information?apiKey=41efd282bd054cc39081439b0618e131&includeNutrition=true`)
+        .then(res => {
+          let price = Math.round(100 * (res.data.pricePerServing / 100)) / 100, imgSrc = res.data.image, recipe = res.data.instructions, time = res.data.readyInMinutes, glutenFree = res.data.glutenFree ? true : false, glutenFreeDisplay = ''
+          if (glutenFree) {
+            glutenFreeDisplay = '✅'
+          }
+          else {
+            glutenFreeDisplay = '❌'
+          }
+          document.getElementById('main').innerHTML += `
+          <div class="col s12 m11">
+            <div class="card horizontal">
+              <div class="card-image">
+                <img src="${imgSrc}" class="responsive-img" alt="${res.data.title}">
+              </div>
+              <div class="card-stacked">
+                <div class="card-content">
                   <h4 class="header">${res.data.title}</h4>
-                  <p>Gluten-Free: ✅ ${glutenFreeDisplay}</p>
-                  <p>Servings: ${res.data.servings}</p>
-                  <p>Price: $${price}/serving</p>
-                  </div>
-                  <div class="card-action">
-                  <a href="#recipe${i}" class="modal-trigger">See Recipe</a>
-                  <a href=""><span class="material-icons right">bookmark_border</span></a>
+                  <p><strong>Gluten-Free</strong>: ${glutenFreeDisplay}</p>
+                  <p><strong>Servings</strong>: ${res.data.servings}</p>
+                  <p><strong>Price</strong>: $${price}/serving</p>
+                </div>
+                <div class="card-action">
+                  <a href="#" data-target="#recipe${i}" class="modal-trigger">See Recipe</a>
+                  <a href=""><span data-value='${favorites[i]}' class="material-icons right addToFavoritesRecipe">bookmark_border</span></a>
 
                 </div>
               </div>
@@ -70,27 +68,12 @@
               </div>
             </div>
             `
-              })
-              .catch(err => console.error(err))
-          })
-          .catch (err => console.error(err))
+          console.log(res.data)
+          var elems = document.querySelectorAll('.modal');
+          var instances = M.Modal.init(elems, {})
+        })
+        .catch(err => console.error(err))
       }
-      // document.getElementById('main').innerHTML +=`
-      //   <div class="row mt-3">
-      //     <div class="col s3">
-      //       <img src="${favorites[i].imgSrc}" class="responsive-img" alt="${favorites[i].res.title}">
-      //     </div>
-      //     <div class="col s9">
-      //        <h3 class="mb-1">${favorites[i].res.data.title} </h2>
-      //        <p>glutenfree? ${favorites[i].glutenFreeDisplay} </p>
-      //        <p class="mb-3">servings: ${favorites[i].res.data.servings} </p>
-
-      //        <p></p>
-      //        <p class="mb-3">Price per serving: ${favorites[i].price}$</p>
-      //      </div>
-      //    </div>
-      // `
-
     
   </script>
 </body>

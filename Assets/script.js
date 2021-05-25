@@ -1,4 +1,4 @@
-$('#main').show()
+
 
 document.addEventListener('DOMContentLoaded', function () {
   var elems = document.querySelectorAll('.modal');
@@ -56,11 +56,11 @@ document.getElementById('search').addEventListener('click', event => {
       }
     })
     .catch(err => console.error(err))
-  axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=${cuisine}&apiKey=8f5b3f3b103643d88ebc4def081beb88`)
+  axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=${cuisine}&apiKey=41efd282bd054cc39081439b0618e131`)
     .then(({ data }) => {
       for (let i = 0; i < 5; i++) {
         let recId = data.results[i].id
-        axios.get(`https://api.spoonacular.com/recipes/${recId}/information?apiKey=8f5b3f3b103643d88ebc4def081beb88&includeNutrition=true`)
+        axios.get(`https://api.spoonacular.com/recipes/${recId}/information?apiKey=41efd282bd054cc39081439b0618e131&includeNutrition=true`)
           .then(res => {
             let price = Math.round(100 * (res.data.pricePerServing / 100)) / 100, imgSrc = res.data.image, recipe = res.data.instructions, time = res.data.readyInMinutes, glutenFree = res.data.glutenFree ? true : false, glutenFreeDisplay = ''
             if (glutenFree) {
@@ -84,7 +84,7 @@ document.getElementById('search').addEventListener('click', event => {
                 </div>
                 <div class="card-action">
                   <a href="#" data-target="#recipe${i}" class="modal-trigger">See Recipe</a>
-                  <a href=""><span class="material-icons right">bookmark_border</span></a>
+                  <a href=""><span data-value='${recId}' class="material-icons right addToFavoritesRecipe">bookmark_border</span></a>
 
                 </div>
               </div>
@@ -117,5 +117,23 @@ document.addEventListener('click', event => {
   if (event.target.className === 'modal-trigger') {
     let instance = M.Modal.getInstance(document.querySelector(event.target.dataset.target))
     instance.open()
+  }
+})
+
+function addToFavs(recID) {
+  let FavRec = JSON.parse(localStorage.getItem('favRec')) || []
+  let alreadyExists = false
+  for (let i=0; i<FavRec.length; i++){
+    if (FavRec[i]==recID){alreadyExists = true}
+  }
+  if (alreadyExists == false){
+    FavRec.push(recID)
+  }
+  localStorage.setItem('favRec', JSON.stringify(FavRec))
+}
+document.addEventListener('click', event => {
+  event.preventDefault()
+  if (event.target.classList.contains('addToFavoritesRecipe')){
+    addToFavs(event.target.dataset.value)
   }
 })
