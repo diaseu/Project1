@@ -1,5 +1,19 @@
 $('#main').show()
 
+let favoriteRestaurants = localStorage.getItem(JSON.parse('favoriteRestaurants')) || 'null'
+let favoriteRecipes = localStorage.getItem(JSON.parse('favoriteRecipes')) || 'null'
+if (favoriteRestaurants !== 'null') {
+  favoriteRestaurants.forEach(restaurant => {
+    //render each favorited restaurant to page
+  })
+}
+if (favoriteRecipes !== 'null') {
+  favoriteRecipes.forEach(recipe => {
+    //render each favorited recipe to page
+  })
+}
+
+
 document.addEventListener('DOMContentLoaded', function () {
   var elems = document.querySelectorAll('.modal');
   var instances = M.Modal.init(elems, {});
@@ -20,13 +34,29 @@ document.getElementById('search').addEventListener('click', event => {
     .then(({ data }) => {
       $('#restaurantResults').html('')
       for (let i = 0; i < 5; i++) {
-        let restName = data.businesses[i].name, address = data.businesses[i].location.display_address, phone = data.businesses[i].phone, price = data.businesses[i].price, rating = data.businesses[i].rating, imgSrc = data.businesses[i].image_url
+        let restName = data.businesses[i].name, address = data.businesses[i].location.display_address, phone = data.businesses[i].phone, price = data.businesses[i].price, rating = data.businesses[i].rating, imgSrc = data.businesses[i].image_url, faveRestaurants = []
         if (phone === '') {
           phone = 'No phone number'
         }
         if (!data.businesses[i].hasOwnProperty('price')) {
           price = 'No price available'
         }
+
+        document.addEventListener('click', event => {
+          if(event.target.className === 'addToFavoritesRestaurant') {
+            // pushes each restaurant we search for into this array
+            faveRestaurants.push({
+              img: imgSrc
+              name: restName,
+              address: address,
+              phone: phone,
+              rating: rating,
+              price: price
+            })
+            localStorage.setItem('favoriteRestaurants', JSON.stringify(faveRestaurants))
+          }
+        })
+
         document.getElementById('restaurantResults').innerHTML += `
         
                   <div class="col s12 m11">
@@ -62,13 +92,28 @@ document.getElementById('search').addEventListener('click', event => {
         let recId = data.results[i].id
         axios.get(`https://api.spoonacular.com/recipes/${recId}/information?apiKey=8f5b3f3b103643d88ebc4def081beb88&includeNutrition=true`)
           .then(res => {
-            let price = Math.round(100 * (res.data.pricePerServing / 100)) / 100, imgSrc = res.data.image, recipe = res.data.instructions, time = res.data.readyInMinutes, glutenFree = res.data.glutenFree ? true : false, glutenFreeDisplay = ''
+            let price = Math.round(100 * (res.data.pricePerServing / 100)) / 100, imgSrc = res.data.image, recipe = res.data.instructions, time = res.data.readyInMinutes, glutenFree = res.data.glutenFree ? true : false, glutenFreeDisplay = '', faveRecipes = []
             if (glutenFree) {
               glutenFreeDisplay = '✅'
             }
             else {
               glutenFreeDisplay = '❌'
             }
+
+            document.addEventListener('click', event => {
+              if (event.target.className.contains('addToFavoritesRecipe')) {
+                faveRecipes.push({
+                  img: imgSrc,
+                  title: res.data.title,
+                  glutenFree: glutenFreeDisplay,
+                  servings: res.data.servings,
+                  price: price,
+                  instructions: res.data.instructions
+                })
+                localStorage.setItem('favoriteRecipes', JSON.stringify(faveRecipes))
+              }
+            })
+
             document.getElementById('recipeResults').innerHTML += `
           <div class="col s12 m11">
             <div class="card horizontal">
