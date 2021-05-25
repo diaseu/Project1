@@ -28,19 +28,25 @@ document.getElementById('search').addEventListener('click', event => {
           price = 'No price available'
         }
         document.getElementById('restaurantResults').innerHTML += `
-        <div class="row mt-3">
-            <div class="col s3">
-              <img src="${imgSrc}" class="responsive-img" alt="${restName}">
-            </div>
-            <div class="col s9">
-              <h3 class="mb-1"> ${restName}</h2>
-              <p>Address: ${address}</p>
-              <p class="mb-3"> phone: ${phone}</p>
-
-              <p>Rating: ${rating}</p>
-              <p class="mb-3">Price: ${price}</p>
+        
+                  <div class="col s12 m11">
+            <div class="card horizontal">
+              <div class="card-image">
+                <img src="${imgSrc}" class="responsive-img" alt="${restName}">
+              </div>
+              <div class="card-stacked">
+                <div class="card-content">
+                  <h4 class="header">${restName}</h4>
+                  <p><strong>Address</strong>: ${address}</p>
+                  <p class="mb-3"><strong>Phone</strong>: ${phone}</p>
+                  <p><strong>Rating</strong>: ${rating}</p>
+                  <p><strong>Price</strong>: ${price}</p>
+                </div>
+              </div>
             </div>
           </div>
+                    
+        
         `
       }
     })
@@ -56,7 +62,7 @@ document.getElementById('search').addEventListener('click', event => {
               glutenFreeDisplay = '✅'
             }
             else {
-              glutenFreeDisplay = 'X'
+              glutenFreeDisplay = '❌'
             }
             document.getElementById('recipeResults').innerHTML += `
           <div class="col s12 m11">
@@ -67,9 +73,9 @@ document.getElementById('search').addEventListener('click', event => {
               <div class="card-stacked">
                 <div class="card-content">
                   <h4 class="header">${res.data.title}</h4>
-                  <p>Gluten-Free: ✅ ${glutenFreeDisplay}</p>
-                  <p>Servings: ${res.data.servings}</p>
-                  <p>Price: $${price}/serving</p>
+                  <p><strong>Gluten-Free</strong>: ${glutenFreeDisplay}</p>
+                  <p><strong>Servings</strong>: ${res.data.servings}</p>
+                  <p><strong>Price</strong>: $${price}/serving</p>
                 </div>
                 <div class="card-action">
                   <a href="#" data-target="#recipe${i}" class="modal-trigger">See Recipe</a>
