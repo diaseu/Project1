@@ -42,6 +42,11 @@ document.getElementById('search').addEventListener('click', event => {
                   <p><strong>Rating</strong>: ${rating}</p>
                   <p><strong>Price</strong>: ${price}</p>
                 </div>
+                <div class="card-action">
+                  
+                  <a href=""><span class="material-icons right">bookmark_border</span></a>
+
+                </div>
               </div>
             </div>
           </div>
