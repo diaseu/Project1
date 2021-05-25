@@ -1,4 +1,4 @@
-$('#main').show()
+
 
 // let favoriteRestaurants = localStorage.getItem(JSON.parse('favoriteRestaurants')) || 'null'
 // let favoriteRecipes = localStorage.getItem(JSON.parse('favoriteRecipes')) || 'null'
@@ -166,10 +166,10 @@ document.addEventListener('click', event => {
 })
 
 function addToFavs(recID) {
-  let FavRest = JSON.parse(localStorage.getItem('favRest')) || []
-  FavRest.push(recID)
+  let FavRec = JSON.parse(localStorage.getItem('favRec')) || []
+  FavRec.push(recID)
   console.log(recID)
-  localStorage.setItem('favRest', JSON.stringify(FavRest))
+  localStorage.setItem('favRec', JSON.stringify(FavRec))
 }
 document.addEventListener('click', event => {
   event.preventDefault()
