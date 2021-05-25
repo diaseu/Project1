@@ -1,17 +1,17 @@
 $('#main').show()
 
-let favoriteRestaurants = localStorage.getItem(JSON.parse('favoriteRestaurants')) || 'null'
-let favoriteRecipes = localStorage.getItem(JSON.parse('favoriteRecipes')) || 'null'
-if (favoriteRestaurants !== 'null') {
-  favoriteRestaurants.forEach(restaurant => {
-    //render each favorited restaurant to page
-  })
-}
-if (favoriteRecipes !== 'null') {
-  favoriteRecipes.forEach(recipe => {
-    //render each favorited recipe to page
-  })
-}
+// let favoriteRestaurants = localStorage.getItem(JSON.parse('favoriteRestaurants')) || 'null'
+// let favoriteRecipes = localStorage.getItem(JSON.parse('favoriteRecipes')) || 'null'
+// if (favoriteRestaurants !== 'null') {
+//   favoriteRestaurants.forEach(restaurant => {
+//     //render each favorited restaurant to page
+//   })
+// }
+// if (favoriteRecipes !== 'null') {
+//   favoriteRecipes.forEach(recipe => {
+//     //render each favorited recipe to page
+//   })
+// }
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -34,7 +34,7 @@ document.getElementById('search').addEventListener('click', event => {
     .then(({ data }) => {
       $('#restaurantResults').html('')
       for (let i = 0; i < 5; i++) {
-        let restName = data.businesses[i].name, address = data.businesses[i].location.display_address, phone = data.businesses[i].phone, price = data.businesses[i].price, rating = data.businesses[i].rating, imgSrc = data.businesses[i].image_url, faveRestaurants = []
+        let restName = data.businesses[i].name, address = data.businesses[i].location.display_address, phone = data.businesses[i].phone, price = data.businesses[i].price, rating = data.businesses[i].rating, imgSrc = data.businesses[i].image_url
         if (phone === '') {
           phone = 'No phone number'
         }
@@ -42,20 +42,20 @@ document.getElementById('search').addEventListener('click', event => {
           price = 'No price available'
         }
 
-        document.addEventListener('click', event => {
-          if(event.target.className === 'addToFavoritesRestaurant') {
-            // pushes each restaurant we search for into this array
-            faveRestaurants.push({
-              img: imgSrc
-              name: restName,
-              address: address,
-              phone: phone,
-              rating: rating,
-              price: price
-            })
-            localStorage.setItem('favoriteRestaurants', JSON.stringify(faveRestaurants))
-          }
-        })
+        // document.addEventListener('click', event => {
+        //   if(event.target.className === 'addToFavoritesRestaurant') {
+        //     // pushes each restaurant we search for into this array
+        //     faveRestaurants.push({
+        //       img: imgSrc
+        //       name: restName,
+        //       address: address,
+        //       phone: phone,
+        //       rating: rating,
+        //       price: price
+        //     })
+        //     localStorage.setItem('favoriteRestaurants', JSON.stringify(faveRestaurants))
+        //   }
+        // })
 
         document.getElementById('restaurantResults').innerHTML += `
         
@@ -92,7 +92,7 @@ document.getElementById('search').addEventListener('click', event => {
         let recId = data.results[i].id
         axios.get(`https://api.spoonacular.com/recipes/${recId}/information?apiKey=41efd282bd054cc39081439b0618e131&includeNutrition=true`)
           .then(res => {
-            let price = Math.round(100 * (res.data.pricePerServing / 100)) / 100, imgSrc = res.data.image, recipe = res.data.instructions, time = res.data.readyInMinutes, glutenFree = res.data.glutenFree ? true : false, glutenFreeDisplay = '', faveRecipes = []
+            let price = Math.round(100 * (res.data.pricePerServing / 100)) / 100, imgSrc = res.data.image, recipe = res.data.instructions, time = res.data.readyInMinutes, glutenFree = res.data.glutenFree ? true : false, glutenFreeDisplay = ''
             if (glutenFree) {
               glutenFreeDisplay = '✅'
             }
@@ -100,19 +100,19 @@ document.getElementById('search').addEventListener('click', event => {
               glutenFreeDisplay = '❌'
             }
 
-            document.addEventListener('click', event => {
-              if (event.target.className.contains('addToFavoritesRecipe')) {
-                faveRecipes.push({
-                  img: imgSrc,
-                  title: res.data.title,
-                  glutenFree: glutenFreeDisplay,
-                  servings: res.data.servings,
-                  price: price,
-                  instructions: res.data.instructions
-                })
-                localStorage.setItem('favoriteRecipes', JSON.stringify(faveRecipes))
-              }
-            })
+            // document.addEventListener('click', event => {
+            //   if (event.target.className.contains('addToFavoritesRecipe')) {
+            //     faveRecipes.push({
+            //       img: imgSrc,
+            //       title: res.data.title,
+            //       glutenFree: glutenFreeDisplay,
+            //       servings: res.data.servings,
+            //       price: price,
+            //       instructions: res.data.instructions
+            //     })
+            //     localStorage.setItem('favoriteRecipes', JSON.stringify(faveRecipes))
+            //   }
+            // })
 
             document.getElementById('recipeResults').innerHTML += `
           <div class="col s12 m11">
