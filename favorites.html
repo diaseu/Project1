@@ -22,8 +22,16 @@
       </div>
     </nav>
   </header>
-  <div id="main"></div>
+  <div id="main">
+    <div class="row">
+      <div id="favRest" class="col s12 m6"></div>
+      <div id="favRec" class="col s12 m6"></div>
+    </div>
+
+  </div>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script>
     let favorites = JSON.parse(localStorage.getItem('favRec'))
     for (i=0; i<favorites.length; i++){
@@ -36,7 +44,7 @@
           else {
             glutenFreeDisplay = '❌'
           }
-          document.getElementById('main').innerHTML += `
+          document.getElementById('favRec').innerHTML += `
           <div class="col s12 m11">
             <div class="card horizontal">
               <div class="card-image">
@@ -52,7 +60,7 @@
                 <div class="card-action">
                   <a href="#" data-target="#recipe${i}" class="modal-trigger">See Recipe</a>
                   <a href=""><span data-value='${favorites[i]}' class="material-icons right addToFavoritesRecipe">bookmark_border</span></a>
-
+                  <a class="right waves-effect waves-light red-text"><i class="material-icons">bookmark_remove</i></a>
                 </div>
               </div>
             </div>
