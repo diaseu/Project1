@@ -1,19 +1,3 @@
-
-
-// let favoriteRestaurants = localStorage.getItem(JSON.parse('favoriteRestaurants')) || 'null'
-// let favoriteRecipes = localStorage.getItem(JSON.parse('favoriteRecipes')) || 'null'
-// if (favoriteRestaurants !== 'null') {
-//   favoriteRestaurants.forEach(restaurant => {
-//     //render each favorited restaurant to page
-//   })
-// }
-// if (favoriteRecipes !== 'null') {
-//   favoriteRecipes.forEach(recipe => {
-//     //render each favorited recipe to page
-//   })
-// }
-
-
 document.addEventListener('DOMContentLoaded', function () {
   var elems = document.querySelectorAll('.modal');
   var instances = M.Modal.init(elems, {});
@@ -42,21 +26,6 @@ document.getElementById('search').addEventListener('click', event => {
         if (!data.businesses[i].hasOwnProperty('price')) {
           price = 'No price available'
         }
-
-        // document.addEventListener('click', event => {
-        //   if(event.target.className === 'addToFavoritesRestaurant') {
-        //     // pushes each restaurant we search for into this array
-        //     faveRestaurants.push({
-        //       img: imgSrc
-        //       name: restName,
-        //       address: address,
-        //       phone: phone,
-        //       rating: rating,
-        //       price: price
-        //     })
-        //     localStorage.setItem('favoriteRestaurants', JSON.stringify(faveRestaurants))
-        //   }
-        // })
 
         document.getElementById('restaurantResults').innerHTML += `
         
@@ -101,20 +70,6 @@ document.getElementById('search').addEventListener('click', event => {
             else {
               glutenFreeDisplay = '❌'
             }
-
-            // document.addEventListener('click', event => {
-            //   if (event.target.className.contains('addToFavoritesRecipe')) {
-            //     faveRecipes.push({
-            //       img: imgSrc,
-            //       title: res.data.title,
-            //       glutenFree: glutenFreeDisplay,
-            //       servings: res.data.servings,
-            //       price: price,
-            //       instructions: res.data.instructions
-            //     })
-            //     localStorage.setItem('favoriteRecipes', JSON.stringify(faveRecipes))
-            //   }
-            // })
 
             document.getElementById('recipeResults').innerHTML += `
           <div class="col s12 m11">
