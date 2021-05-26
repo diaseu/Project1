@@ -28,10 +28,6 @@ main {
   margin: 0 0 1em 0;
 }
 
-.spacer {
-  height: 10vh;
-}
-
 #index-banner {
   background-color: #00796b;
   color: #fff;
@@ -85,6 +81,10 @@ main {
   margin-top: 6rem;
 }
 
+.spacer {
+  height: 10vh;
+}
+
 /* Headings */
 h3 {
   margin: 0;
@@ -103,6 +103,14 @@ h3 {
 a {
   color: #fae3d9;
   transition: all 2s;
+}
+
+.small {
+  font-size: 0.5rem;
+}
+
+.doublespaced {
+  line-height: 150%;
 }
 
 /* Nav */
