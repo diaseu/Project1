@@ -1,14 +1,32 @@
+let zipcode = document.getElementById('location').value, cuisine = document.getElementById('cuisine').value
+let hcuisine = localStorage.getItem('hcuisine')
+let hlocation = localStorage.getItem('hlocation')
+
+$(document).ready(function () {
+
+  console.log(localStorage.getItem('hcuisine'))
+
+  if (hcuisine !== null) {
+    cuisine = hcuisine
+    zipcode = hlocation
+    getYelp()
+    getSpoon()
+  } else {
+    cuisine = document.getElementById('cuisine').value
+    zipcode = document.getElementById('location').value
+  }
+})
+// End the document.ready
+
 document.addEventListener('DOMContentLoaded', function () {
   var elems = document.querySelectorAll('.modal');
   var instances = M.Modal.init(elems, {});
 });
 
-document.getElementById('search').addEventListener('click', event => {
-  event.preventDefault()
+function getYelp() {
   $('#restaurantResults').html('')
   $('#recipeResults').html('')
   $('#main').show()
-  let zipcode = document.getElementById('location').value, cuisine = document.getElementById('cuisine').value
   axios.get('https://cors-proxy-j.herokuapp.com/', {
     headers: {
       // here, pass the actual API request url you are trying to hit
@@ -56,7 +74,9 @@ document.getElementById('search').addEventListener('click', event => {
       }
     })
     .catch(err => console.error(err))
-  
+}
+
+function getSpoon() {
   axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=${cuisine}&apiKey=390ebfa488364e6496ce8853bd9bb10d`)
     .then(({ data }) => {
       for (let i = 0; i < 5; i++) {
@@ -70,50 +90,60 @@ document.getElementById('search').addEventListener('click', event => {
             else {
               glutenFreeDisplay = '❌'
             }
-
             document.getElementById('recipeResults').innerHTML += `
-          <div class="col s12 m11">
-            <div class="card horizontal">
-              <div class="card-image">
-                <img src="${imgSrc}" class="responsive-img" alt="${res.data.title}">
-              </div>
-              <div class="card-stacked">
-                <div class="card-content">
-                  <h4 class="header">${res.data.title}</h4>
-                  <p><strong>Gluten-Free</strong>: ${glutenFreeDisplay}</p>
-                  <p><strong>Servings</strong>: ${res.data.servings}</p>
-                  <p><strong>Price</strong>: $${price}/serving</p>
-                </div>
-                <div class="card-action">
-                  <a href="#" data-target="#recipe${i}" class="modal-trigger">See Recipe</a>
-                  <a href=""><span data-value='${recId}' class="material-icons right addToFavoritesRecipe">bookmark_border</span></a>
+              <div class="col s12 m11">
+                <div class="card horizontal">
+                  <div class="card-image">
+                    <img src="${imgSrc}" class="responsive-img" alt="${res.data.title}">
+                  </div>
+                  <div class="card-stacked">
+                    <div class="card-content">
+                      <h4 class="header">${res.data.title}</h4>
+                      <p><strong>Gluten-Free</strong>: ${glutenFreeDisplay}</p>
+                      <p><strong>Servings</strong>: ${res.data.servings}</p>
+                      <p><strong>Price</strong>: $${price}/serving</p>
+                    </div>
+                    <div class="card-action">
+                      <a href="#" data-target="#recipe${i}" class="modal-trigger">See Recipe</a>
+                      <a href=""><span data-value='${recId}' class="material-icons right addToFavoritesRecipe">bookmark_border</span></a>
 
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-                    
-            <div id="recipe${i}" class="modal modal-fixed-footer">
-              <div class="modal-content">
-                <h4>${res.data.title}</h4>
-                <p>${res.data.instructions}</p>
-              </div>
-              <div class="modal-footer">
-                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
-              </div>
-            </div>
-            `
-            console.log(res.data)
+                        
+                <div id="recipe${i}" class="modal modal-fixed-footer">
+                  <div class="modal-content">
+                    <h4>${res.data.title}</h4>
+                    <p>${res.data.instructions}</p>
+                  </div>
+                  <div class="modal-footer">
+                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+                  </div>
+                </div>
+                `
             var elems = document.querySelectorAll('.modal');
             var instances = M.Modal.init(elems, {})
           })
           .catch(err => console.error(err))
 
       }
-
     })
     .catch(err => console.error(err))
+}
+
+
+
+document.getElementById('search').addEventListener('click', event => {
+  event.preventDefault()
+  cuisine = document.getElementById('cuisine').value
+  zipcode = document.getElementById('location').value
+  localStorage.setItem('hcuisine', document.getElementById('cuisine').value);
+  localStorage.setItem('hlocation', document.getElementById('location').value);
+  getYelp()
+  getSpoon()
 })
+
 
 document.addEventListener('click', event => {
   if (event.target.className === 'modal-trigger') {
@@ -125,10 +155,10 @@ document.addEventListener('click', event => {
 function addToFavs(recID) {
   let FavRec = JSON.parse(localStorage.getItem('favRec')) || []
   let alreadyExists = false
-  for (let i=0; i<FavRec.length; i++){
-    if (FavRec[i]==recID){alreadyExists = true}
+  for (let i = 0; i < FavRec.length; i++) {
+    if (FavRec[i] == recID) { alreadyExists = true }
   }
-  if (alreadyExists == false){
+  if (alreadyExists == false) {
     FavRec.push(recID)
   }
   localStorage.setItem('favRec', JSON.stringify(FavRec))
@@ -155,7 +185,7 @@ function addToFaveRests(restName, restAddress, imgSrc, phone, rating, price) {
 
 document.addEventListener('click', event => {
   event.preventDefault()
-  if (event.target.classList.contains('addToFavoritesRecipe')){
+  if (event.target.classList.contains('addToFavoritesRecipe')) {
     addToFavs(event.target.dataset.value)
     $(event.target).text('bookmark')
   }
