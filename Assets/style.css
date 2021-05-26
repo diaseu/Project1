@@ -113,6 +113,10 @@ a {
   line-height: 150%;
 }
 
+.strong {
+  font-weight: 600;
+}
+
 /* Nav */
 
 /* Footer */
