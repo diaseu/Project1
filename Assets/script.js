@@ -19,6 +19,7 @@ document.getElementById('search').addEventListener('click', event => {
   })
     .then(({ data }) => {
       $('#restaurantResults').html('')
+      $('#recipeResults').html('')
       for (let i = 0; i < 5; i++) {
         let restName = data.businesses[i].name, address = data.businesses[i].location.display_address, phone = data.businesses[i].phone, price = data.businesses[i].price, rating = data.businesses[i].rating, imgSrc = data.businesses[i].image_url
         if (phone === '') {
@@ -135,5 +136,6 @@ document.addEventListener('click', event => {
   event.preventDefault()
   if (event.target.classList.contains('addToFavoritesRecipe')){
     addToFavs(event.target.dataset.value)
+    $(event.target).text('bookmark')
   }
 })
