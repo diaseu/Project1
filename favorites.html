@@ -33,10 +33,10 @@
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script>
-    /*
+    
     let favorites = JSON.parse(localStorage.getItem('favRec'))
     for (i=0; i<favorites.length; i++){
-      axios.get(`https://api.spoonacular.com/recipes/${favorites[i]}/information?apiKey=41efd282bd054cc39081439b0618e131&includeNutrition=true`)
+      axios.get(`https://api.spoonacular.com/recipes/${favorites[i]}/information?apiKey=8f5b3f3b103643d88ebc4def081beb88&includeNutrition=true`)
         .then(res => {
           let price = Math.round(100 * (res.data.pricePerServing / 100)) / 100, imgSrc = res.data.image, recipe = res.data.instructions, time = res.data.readyInMinutes, glutenFree = res.data.glutenFree ? true : false, glutenFreeDisplay = ''
           if (glutenFree) {
@@ -82,58 +82,34 @@
           var instances = M.Modal.init(elems, {})
         })
         .catch(err => console.error(err))
-    } */
+    }
 
     let favoriteRests = JSON.parse(localStorage.getItem('favRest'))
     for (let i = 0; i < favoriteRests.length; i++) {
-      axios.get('https://cors-proxy-j.herokuapp.com/', {
-        headers: {
-          // here, pass the actual API request url you are trying to hit
-          'Target-URL': `https://api.yelp.com/v3/businesses/search?location=${favoriteRests[i].restAddress}&term=${favoriteRests[i].restName}&limit=5`,
-          // here, put any other important headers if needed from the API
-          'Authorization': 'Bearer lbogapYHxff9h2fSNoWEoM420b8mRfQ4JBsiphR6BtaNKlmR51XQt3wCm2ocKhlkvpnv_46BvAcMuB_cTrv7pmRtuMMplxzaBAA_nAU57ttpRZlv9y05lvxWcXUoX3Yx'
-        }
-      })
-        .then(({ data }) => {
-          $('#restaurantResults').html('')
-          for (let i = 0; i < 5; i++) {
-            let restName = data.businesses[i].name, address = data.businesses[i].location.display_address, phone = data.businesses[i].phone, price = data.businesses[i].price, rating = data.businesses[i].rating, imgSrc = data.businesses[i].image_url
-            if (phone === '') {
-              phone = 'No phone number'
-            }
-            if (!data.businesses[i].hasOwnProperty('price')) {
-              price = 'No price available'
-            }
-
-            document.getElementById('favRest').innerHTML += `
+      document.getElementById('favRest').innerHTML += `
         
                   <div class="col s12 m11">
             <div class="card horizontal">
               <div class="card-image">
-                <img src="${imgSrc}" class="responsive-img" alt="${restName}">
+                <img src="${favoriteRests[i].imgSrc}" class="responsive-img" alt="${favoriteRests[i].restName}">
               </div>
               <div class="card-stacked">
                 <div class="card-content">
-                  <h4 class="header">${restName}</h4>
-                  <p><strong>Address</strong>: ${address}</p>
-                  <p class="mb-3"><strong>Phone</strong>: ${phone}</p>
-                  <p><strong>Rating</strong>: ${rating}</p>
-                  <p><strong>Price</strong>: ${price}</p>
+                  <h4 class="header">${favoriteRests[i].restName}</h4>
+                  <p><strong>Address</strong>: ${favoriteRests[i].restAddress}</p>
+                  <p class="mb-3"><strong>Phone</strong>: ${favoriteRests[i].restPhone}</p>
+                  <p><strong>Rating</strong>: ${favoriteRests[i].restRating}</p>
+                  <p><strong>Price</strong>: ${favoriteRests[i].restPrice}</p>
                 </div>
                 <div class="card-action">
                   
-                  <a href=""><span class="material-icons right addToFavoritesRest" data-name="${restName}" data-address="${address}" bookmark_border</span></a>
+                  <a href=""><span class="material-icons right addToFavoritesRest" data-name="${favoriteRests[i].restName}" data-address="${favoriteRests[i].restAddress}" data-img="${favoriteRests[i].imgSrc}" data-phone="${favoriteRests[i].restPhone}" data-rating="${favoriteRests[i].restRating}" data-price="${favoriteRests[i].restPrice}"> bookmark_border</span></a>
 
                 </div>
               </div>
             </div>
           </div>
-                    
-        
-        `
-          }
-        })
-        .catch(err => console.error(err))
+      `
     }
     
   </script>
