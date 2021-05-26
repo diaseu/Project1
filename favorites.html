@@ -22,7 +22,8 @@
       </div>
     </nav>
   </header>
-  <div id="main"></div>
+  <div id="favRest"></div>
+  <div id="favRec"></div>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script>
@@ -37,7 +38,7 @@
           else {
             glutenFreeDisplay = '❌'
           }
-          document.getElementById('main').innerHTML += `
+          document.getElementById('favRec').innerHTML += `
           <div class="col s12 m11">
             <div class="card horizontal">
               <div class="card-image">
