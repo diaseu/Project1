@@ -44,7 +44,7 @@ document.getElementById('search').addEventListener('click', event => {
                 </div>
                 <div class="card-action">
                   
-                  <a href=""><span class="material-icons right addToFavoritesRest" data-name="${restName}" data-address="${address}"> bookmark_border</span></a>
+                  <a href=""><span class="material-icons right addToFavoritesRest" data-name="${restName}" data-address="${address}" data-img="${imgSrc}" data-phone="${phone}" data-rating="${rating}" data-price="${price}"> bookmark_border</span></a>
 
                 </div>
               </div>
@@ -134,14 +134,21 @@ function addToFavs(recID) {
   localStorage.setItem('favRec', JSON.stringify(FavRec))
 }
 
-function addToFaveRests(restName, restAddress) {
+function addToFaveRests(restName, restAddress, imgSrc, phone, rating, price) {
   let FavRest = JSON.parse(localStorage.getItem('favRest')) || []
   let alreadyExists = false
   for (let i = 0; i < FavRest.length; i++) {
     if (FavRest[i].restAddress === restAddress) { alreadyExists = true }
   }
   if (alreadyExists == false) {
-    FavRest.push({restName: restName, restAddress: restAddress})
+    FavRest.push({
+      restName: restName,
+      restAddress: restAddress,
+      imgSrc: imgSrc,
+      restPhone: phone,
+      restRating: rating,
+      restPrice: price
+    })
   }
   localStorage.setItem('favRest', JSON.stringify(FavRest))
 }
@@ -157,6 +164,6 @@ document.addEventListener('click', event => {
 document.addEventListener('click', event => {
   event.preventDefault()
   if (event.target.classList.contains('addToFavoritesRest')) {
-    addToFaveRests(event.target.dataset.name, event.target.dataset.address)
+    addToFaveRests(event.target.dataset.name, event.target.dataset.address, event.target.dataset.img, event.target.dataset.phone, event.target.dataset.rating, event.target.dataset.price)
   }
 })
