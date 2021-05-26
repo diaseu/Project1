@@ -74,7 +74,7 @@ document.getElementById('search').addEventListener('click', event => {
                 </div>
                 <div class="card-action">
                   
-                  <a href=""><span class="material-icons right">bookmark_border</span></a>
+                  <a href=""><span class="material-icons right addToFavoritesRest" data-name="${restName}" data-address="${address}"> bookmark_border</span></a>
 
                 </div>
               </div>
@@ -86,6 +86,7 @@ document.getElementById('search').addEventListener('click', event => {
       }
     })
     .catch(err => console.error(err))
+  
   axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=${cuisine}&apiKey=41efd282bd054cc39081439b0618e131`)
     .then(({ data }) => {
       for (let i = 0; i < 5; i++) {
@@ -176,9 +177,29 @@ function addToFavs(recID) {
   }
   localStorage.setItem('favRec', JSON.stringify(FavRec))
 }
+
+function addToFaveRests(restName, restAddress) {
+  let FavRest = JSON.parse(localStorage.getItem('favRest')) || []
+  let alreadyExists = false
+  for (let i = 0; i < FavRest.length; i++) {
+    if (FavRest[i].restAddress === restAddress) { alreadyExists = true }
+  }
+  if (alreadyExists == false) {
+    FavRest.push({restName: restName, restAddress: restAddress})
+  }
+  localStorage.setItem('favRest', JSON.stringify(FavRest))
+}
+
 document.addEventListener('click', event => {
   event.preventDefault()
   if (event.target.classList.contains('addToFavoritesRecipe')){
     addToFavs(event.target.dataset.value)
+  }
+})
+
+document.addEventListener('click', event => {
+  event.preventDefault()
+  if (event.target.classList.contains('addToFavoritesRest')) {
+    addToFaveRests(event.target.dataset.name, event.target.dataset.address)
   }
 })

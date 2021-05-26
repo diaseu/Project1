@@ -24,7 +24,10 @@
   </header>
   <div id="main"></div>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script>
+    /*
     let favorites = JSON.parse(localStorage.getItem('favRec'))
     for (i=0; i<favorites.length; i++){
       axios.get(`https://api.spoonacular.com/recipes/${favorites[i]}/information?apiKey=41efd282bd054cc39081439b0618e131&includeNutrition=true`)
@@ -73,7 +76,74 @@
           var instances = M.Modal.init(elems, {})
         })
         .catch(err => console.error(err))
-      }
+    } */
+
+    let favoriteRests = JSON.parse(localStorage.getItem('favRest'))
+    for (let i = 0; i < favoriteRests.length; i++) {
+      axios.get('https://cors-proxy-j.herokuapp.com/', {
+        headers: {
+          // here, pass the actual API request url you are trying to hit
+          'Target-URL': `https://api.yelp.com/v3/businesses/search?location=${favoriteRests[i].restAddress}&term=${favoriteRests[i].restName}&limit=5`,
+          // here, put any other important headers if needed from the API
+          'Authorization': 'Bearer lbogapYHxff9h2fSNoWEoM420b8mRfQ4JBsiphR6BtaNKlmR51XQt3wCm2ocKhlkvpnv_46BvAcMuB_cTrv7pmRtuMMplxzaBAA_nAU57ttpRZlv9y05lvxWcXUoX3Yx'
+        }
+      })
+        .then(({ data }) => {
+          $('#restaurantResults').html('')
+          for (let i = 0; i < 5; i++) {
+            let restName = data.businesses[i].name, address = data.businesses[i].location.display_address, phone = data.businesses[i].phone, price = data.businesses[i].price, rating = data.businesses[i].rating, imgSrc = data.businesses[i].image_url
+            if (phone === '') {
+              phone = 'No phone number'
+            }
+            if (!data.businesses[i].hasOwnProperty('price')) {
+              price = 'No price available'
+            }
+
+            // document.addEventListener('click', event => {
+            //   if(event.target.className === 'addToFavoritesRestaurant') {
+            //     // pushes each restaurant we search for into this array
+            //     faveRestaurants.push({
+            //       img: imgSrc
+            //       name: restName,
+            //       address: address,
+            //       phone: phone,
+            //       rating: rating,
+            //       price: price
+            //     })
+            //     localStorage.setItem('favoriteRestaurants', JSON.stringify(faveRestaurants))
+            //   }
+            // })
+
+            document.getElementById('main').innerHTML += `
+        
+                  <div class="col s12 m11">
+            <div class="card horizontal">
+              <div class="card-image">
+                <img src="${imgSrc}" class="responsive-img" alt="${restName}">
+              </div>
+              <div class="card-stacked">
+                <div class="card-content">
+                  <h4 class="header">${restName}</h4>
+                  <p><strong>Address</strong>: ${address}</p>
+                  <p class="mb-3"><strong>Phone</strong>: ${phone}</p>
+                  <p><strong>Rating</strong>: ${rating}</p>
+                  <p><strong>Price</strong>: ${price}</p>
+                </div>
+                <div class="card-action">
+                  
+                  <a href=""><span class="material-icons right addToFavoritesRest" data-name="${restName}" data-address="${address}" bookmark_border</span></a>
+
+                </div>
+              </div>
+            </div>
+          </div>
+                    
+        
+        `
+          }
+        })
+        .catch(err => console.error(err))
+    }
     
   </script>
 </body>
