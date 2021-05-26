@@ -50,7 +50,7 @@
   <script>
     let favorites = JSON.parse(localStorage.getItem('favRec'))
     for (i=0; i<favorites.length; i++){
-      axios.get(`https://api.spoonacular.com/recipes/${favorites[i]}/information?apiKey=41efd282bd054cc39081439b0618e131&includeNutrition=true`)
+      axios.get(`https://api.spoonacular.com/recipes/${favorites[i]}/information?apiKey=390ebfa488364e6496ce8853bd9bb10d&includeNutrition=true`)
         .then(res => {
           let price = Math.round(100 * (res.data.pricePerServing / 100)) / 100, imgSrc = res.data.image, recipe = res.data.instructions, time = res.data.readyInMinutes, glutenFree = res.data.glutenFree ? true : false, glutenFreeDisplay = ''
           if (glutenFree) {
@@ -74,8 +74,8 @@
                 </div>
                 <div class="card-action">
                   <a href="#" data-target="#recipe${i}" class="modal-trigger">See Recipe</a>
-                  <a href=""><span data-value='${favorites[i]}' class="material-icons right addToFavoritesRecipe">bookmark_border</span></a>
-                  <a class="right waves-effect waves-light red-text"><i class="material-icons">bookmark_remove</i></a>
+                  <a href=""><span data-value="${res.data.id}" class="material-icons right addToFavoritesRecipe">bookmark_remove</span></a>
+
                 </div>
               </div>
             </div>
@@ -97,6 +97,23 @@
         })
         .catch(err => console.error(err))
       }
-    
+      document.addEventListener('click', event => {
+          event.preventDefault()
+          if (event.target.classList.contains('addToFavoritesRecipe')) {
+            event.target.parentNode.parentNode.parentNode.parentNode.remove()
+            let favs = JSON.parse(localStorage.getItem('favRec'))
+            console.log(event.target.dataset.value)
+            function removeItemOnce(arr, value) {
+              var index = arr.indexOf(value);
+              if (index > -1) {
+                arr.splice(index, 1);
+              }
+              return arr;
+            }
+            favs = removeItemOnce(favs, event.target.dataset.value)
+            localStorage.setItem('favRec', JSON.stringify(favs))
+
+          }
+        })
   </script>
 </body>
