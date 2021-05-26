@@ -165,5 +165,6 @@ document.addEventListener('click', event => {
   event.preventDefault()
   if (event.target.classList.contains('addToFavoritesRest')) {
     addToFaveRests(event.target.dataset.name, event.target.dataset.address, event.target.dataset.img, event.target.dataset.phone, event.target.dataset.rating, event.target.dataset.price)
+    $(event.target).text('bookmark')
   }
 })

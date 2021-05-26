@@ -28,7 +28,7 @@
       <div id="favRec" class="col s12 m6"></div>
     </div>
   </div>
-  
+
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
@@ -103,7 +103,7 @@
                 </div>
                 <div class="card-action">
                   
-                  <a href=""><span class="material-icons right addToFavoritesRest" data-name="${favoriteRests[i].restName}" data-address="${favoriteRests[i].restAddress}" data-img="${favoriteRests[i].imgSrc}" data-phone="${favoriteRests[i].restPhone}" data-rating="${favoriteRests[i].restRating}" data-price="${favoriteRests[i].restPrice}"> bookmark_border</span></a>
+                  <a href=""><span class="material-icons right addToFavoritesRest" data-name="${favoriteRests[i].restName}" data-address="${favoriteRests[i].restAddress}" data-img="${favoriteRests[i].imgSrc}" data-phone="${favoriteRests[i].restPhone}" data-rating="${favoriteRests[i].restRating}" data-price="${favoriteRests[i].restPrice}"> bookmark_remove </span></a>
 
                 </div>
               </div>
@@ -119,6 +119,7 @@
       //       event.target.parentNode.parentNode.parentNode.parentNode.remove()
       //       let favs = JSON.parse(localStorage.getItem('favRec'))
       
+      // this removes recipes from favorites
       document.addEventListener('click', event => {
           event.preventDefault()
           if (event.target.classList.contains('addToFavoritesRecipe')) {
@@ -137,5 +138,22 @@
 
           }
         })
+
+      // this removes restaurants from favorites
+      document.addEventListener('click', event => {
+          event.preventDefault()
+          if (event.target.classList.contains('addToFavoritesRest')) {
+            event.target.parentNode.parentNode.parentNode.parentNode.remove()
+            let favs = JSON.parse(localStorage.getItem('favRest'))
+            for (let i = 0; i < favs.length; i++) {
+              if (favs[i].restAddress === event.target.dataset.address) {
+                if (i > -1) {
+                  favs.splice(i, 1)
+                }
+              }
+            }
+            localStorage.setItem('favRest', JSON.stringify(favs))
+          }
+      })
   </script>
 </body>
