@@ -8,6 +8,8 @@
   <title>OUTIN - project01 : home</title>
   <!-- CSS Stylesheets -->
   <link rel="stylesheet" href="./Assets/css/reset.css">
+  <!-- <link rel="stylesheet" href="./Assets/css/bootstrap-min.css">
+  <link rel="stylesheet" href="./Assets/css/bootstrap-theme.min.css"> -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="stylesheet" href="./Assets/css/style.css">
@@ -16,38 +18,41 @@
 <body>
   <header>
     <nav class="teal darken-2 row">
-      <div class="col s6 m4 caps brand"><span class="material-icons">local_dining</span> <a href="index.html" onclick="location.replace('index.html'),'_top'"><span class="accent2">Out</span><span class="accent">in</span></a></div>
-    <!-- Need Navbar-Brand -->
-    <!-- Need Cuisine type input -->
-      <div class="col s12 m2">
+    <!-- Navbar-Brand -->
+          <div class="col s6 m4 caps brand"><span class="material-icons">local_dining</span> <a href="index.html" class="hide-on-med-and-down" onclick="location.replace('index.html'),'_top'"><span class="accent2">Out</span><span class="accent">in</span></a></div>
+    <!-- Mobile Hamburger -->
+    <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
+    <ul class="sidenav" id="mobile-demo">
+      <li><a href="search.html"><i class="material-icons">search</i> Search</a></li>
+      <li><a href="favorites.html"><i class="material-icons">bookmarks</i> Favorites</a></li>
+    </ul>
+    <!-- Cuisine type input -->
+      <div class="col s12 m2 hide-on-med-and-down">
         <input id="hcuisine" type="text" class="" placeholder="Type of Cuisine">
       </div>
-    <!-- Need Location input -->
-      <div class="col s12 m2">
+    <!-- Location input -->
+      <div class="col s12 m2 hide-on-med-and-down">
         <input id="hlocation" type="text" class="" placeholder="City, State or Zipcode">
       </div>
-    <!-- Need Search Button -->
-      <div class="col s12 m1">
+    <!-- Search Button -->
+      <div class="col s12 m1 hide-on-med-and-down">
         <button class="btn waves-effect waves-light" id="hsearch">Search</button>
       </div>
-    <!-- Need Favorites page link -->
-      <div class="col s12 m1 offset-m2 padding-sides">
-        <a href="favorites.html" class="right" onclick="location.replace('favorites.html'),'_top'">Favorites</a>
-      </div>
+    <!-- Favorites page link -->
+    <ul class="right hide-on-med-and-down">
+      <li><a href="favorites.html" class="right" onclick="location.replace('favorites.html'),'_top'">Favorites</a></li>
+    </ul>
     </nav>
   </header>
 
 <div class="section no-pad-bot" id="index-banner">
   <div class="container">
-    <br><br>
-    <h1 class="header center teal-text lighten-2-text"><span class="material-icons big">local_dining</span></h1>
+    <h1 class="header center teal-text lighten-2-text hide-on-med-and-down"><span class="material-icons big">local_dining</span></h1>
     <div class="row center">
       <h5 class="header col s12 light"><strong class="caps">Eat <b class="accent2">out</b></strong> or <strong class="caps">eat <b class="accent">in</b></strong>?</h5>
     </div>
-    <div class="row center">
-      
-      <a href="#homeMain" id="download-button"
-        class="waves-effect waves-light teal-text"><span class="material-icons">expand_more</span></a>
+    <div class="row center hide-on-med-and-down">
+      <a href="#homeMain" id="download-button" class="waves-effect waves-light teal-text"><span class="material-icons">expand_more</span></a>
     </div>
     <br><br>
 
@@ -68,7 +73,7 @@
         </div>
       </div>
 
-      <div class="col s12 m4">
+      <div class="col s12 m4 hide-on-med-and-down">
         <div class="card">
           <div class="card-image">
             <img class="activator" src="./Assets/img/eatout1.jpg">
@@ -76,7 +81,7 @@
         </div>
       </div>
 
-      <div class="col s12 m4">
+      <div class="col s12 m4 hide-on-med-and-down">
         <div class="card">
           <div class="card-image">
             <img class="activator" src="./Assets/img/cook2.jpg">
@@ -86,11 +91,11 @@
       </div>
     </div>
 
-    <div class="row mt-6">
+    <div class="row mt-3">
       <div class="col s12 m12">
       <div class="card-content homeCard">
         <span class="card-title activator grey-text text-darken-4">
-          <h5 class="caps">Welcome!</h5>
+          <h5 class="caps center"><strong class="accent2">Out<span class="accent">in</span></strong></h5>
           <p>People have wondered for the longest time whether they should eat out (dining out a restaurant) or eat in (cook
           and prepare their own food at home). Our site aims to solve that problem. Using our search feature, you can easily
           decide between eating in/out. Powered by Yelp and Spoonacular, a list of restaurants and recipes are readily available
@@ -130,11 +135,17 @@
   </footer>
 
 
-
+  <!-- <script src="./Assets/js/bootstrap.min.js"></script> -->
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <!-- <script src="./Assets/script.js"></script> -->
   <script src="./Assets/js/search.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var elems = document.querySelectorAll('.sidenav');
+      var instances = M.Sidenav.init(elems, {edge: 'right'});
+    });
+  </script>
 </body>
 </html>

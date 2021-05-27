@@ -19,7 +19,7 @@ main {
 }
 
 .homeCard p {
-  font-size: 28px;
+  font-size: 150%;
   line-height: 130%;
   max-width: 80%;
   margin: 0 auto;
@@ -49,6 +49,19 @@ main {
   top: -10vh;
   color: #fff;
   min-height: 30vh;
+}
+
+@media only screen and (max-width: 850px) {
+  #homeMain {
+    top: -30vh;
+  }
+}
+
+.sidenav {
+  width: 50%;
+  top: 10%;
+  height: 13%;
+  background-color: #fae3d9;
 }
 
 /* Color Styles */

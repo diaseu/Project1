@@ -78,12 +78,12 @@ function getYelp() {
 }
 
 function getSpoon() {
-  axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=${cuisine}&apiKey=8f5b3f3b103643d88ebc4def081beb88`)
+  axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=${cuisine}&apiKey=fe6cba05576c4d7ca753b844013fecbe`)
     .then(({ data }) => {
       console.log(data)
       for (let i = 0; i < 5; i++) {
         let recId = data.results[i].id
-        axios.get(`https://api.spoonacular.com/recipes/${recId}/information?apiKey=8f5b3f3b103643d88ebc4def081beb88&includeNutrition=true`)
+        axios.get(`https://api.spoonacular.com/recipes/${recId}/information?apiKey=fe6cba05576c4d7ca753b844013fecbe&includeNutrition=true`)
           .then(res => {
             let price = Math.round(100 * (res.data.pricePerServing / 100)) / 100, imgSrc = res.data.image, recipe = res.data.instructions, time = res.data.readyInMinutes, glutenFree = res.data.glutenFree ? true : false, glutenFreeDisplay = '', ingredients = res.data.analyzedInstructions[0].steps
             console.log(res.data.analyzedInstructions[0].steps)
@@ -125,13 +125,15 @@ function getSpoon() {
                     <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
                   </div>
                 </div>
-                `   
+                `
             var elems = document.querySelectorAll('.modal');
             var instances = M.Modal.init(elems, {})
             // add ingredients to the modal 
-            for(let j=0;j<ingredients.length;j++) {
-              for(let p=0; p<ingredients[j].ingredients.length; p++){
-                $(`#ingredients${i}`).append(`<li>${ingredients[j].number} x ${ingredients[j].ingredients[p].name}</li>`)}}
+            for (let j = 0; j < ingredients.length; j++) {
+              for (let p = 0; p < ingredients[j].ingredients.length; p++) {
+                $(`#ingredients${i}`).append(`<li>${ingredients[j].number} x ${ingredients[j].ingredients[p].name}</li>`)
+              }
+            }
           })
           .catch(err => console.error(err))
 
