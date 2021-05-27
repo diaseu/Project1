@@ -78,12 +78,12 @@ function getYelp() {
 }
 
 function getSpoon() {
-  axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=${cuisine}&apiKey=d3776935326b42dd81338d1151d0e183`)
+  axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=${cuisine}&apiKey=8f5b3f3b103643d88ebc4def081beb88`)
     .then(({ data }) => {
       console.log(data)
       for (let i = 0; i < 1; i++) {
         let recId = data.results[i].id
-        axios.get(`https://api.spoonacular.com/recipes/${recId}/information?apiKey=d3776935326b42dd81338d1151d0e183&includeNutrition=true`)
+        axios.get(`https://api.spoonacular.com/recipes/${recId}/information?apiKey=8f5b3f3b103643d88ebc4def081beb88&includeNutrition=true`)
           .then(res => {
             let price = Math.round(100 * (res.data.pricePerServing / 100)) / 100, imgSrc = res.data.image, recipe = res.data.instructions, time = res.data.readyInMinutes, glutenFree = res.data.glutenFree ? true : false, glutenFreeDisplay = '', ingredients = res.data.extendedIngredients
             console.log(ingredients)
@@ -194,8 +194,24 @@ function addToFaveRests(restName, restAddress, imgSrc, phone, rating, price) {
 document.addEventListener('click', event => {
   event.preventDefault()
   if (event.target.classList.contains('addToFavoritesRecipe')) {
+    if (event.target.textContent === 'bookmark') {
+      let favs = JSON.parse(localStorage.getItem('favRec'))
+      console.log(event.target.dataset.value)
+      function removeItemOnce(arr, value) {
+        var index = arr.indexOf(value);
+        if (index > -1) {
+          arr.splice(index, 1);
+        }
+        return arr;
+      }
+      favs = removeItemOnce(favs, event.target.dataset.value)
+      localStorage.setItem('favRec', JSON.stringify(favs))
+      event.target.textContent = 'bookmark_border'
+    }
+    else {
     addToFavs(event.target.dataset.value)
     $(event.target).text('bookmark')
+  }
   }
 })
 
