@@ -78,15 +78,15 @@ function getYelp() {
 }
 
 function getSpoon() {
-  axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=${cuisine}&apiKey=8f5b3f3b103643d88ebc4def081beb88`)
+  axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=${cuisine}&apiKey=d3776935326b42dd81338d1151d0e183`)
     .then(({ data }) => {
       console.log(data)
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < 1; i++) {
         let recId = data.results[i].id
-        axios.get(`https://api.spoonacular.com/recipes/${recId}/information?apiKey=8f5b3f3b103643d88ebc4def081beb88&includeNutrition=true`)
+        axios.get(`https://api.spoonacular.com/recipes/${recId}/information?apiKey=d3776935326b42dd81338d1151d0e183&includeNutrition=true`)
           .then(res => {
-            let price = Math.round(100 * (res.data.pricePerServing / 100)) / 100, imgSrc = res.data.image, recipe = res.data.instructions, time = res.data.readyInMinutes, glutenFree = res.data.glutenFree ? true : false, glutenFreeDisplay = '', ingredients = res.data.analyzedInstructions[0].steps
-            console.log(res.data.analyzedInstructions[0].steps)
+            let price = Math.round(100 * (res.data.pricePerServing / 100)) / 100, imgSrc = res.data.image, recipe = res.data.instructions, time = res.data.readyInMinutes, glutenFree = res.data.glutenFree ? true : false, glutenFreeDisplay = '', ingredients = res.data.extendedIngredients
+            console.log(ingredients)
             if (glutenFree) {
               glutenFreeDisplay = '✅'
             }
@@ -131,8 +131,7 @@ function getSpoon() {
             var instances = M.Modal.init(elems, {})
             // add ingredients to the modal 
             for(let j=0;j<ingredients.length;j++) {
-              for(let p=0; p<ingredients[j].ingredients.length; p++){
-                $(`#ingredients${i}`).append(`<li>${ingredients[j].number} unit ${ingredients[j].ingredients[p].name}</li>`)}}
+              $(`#ingredients${i}`).append(`<li>${ingredients[j].original}</li>`)}
           })
           .catch(err => console.error(err))
 
