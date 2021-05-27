@@ -2,16 +2,17 @@ let zipcode = document.getElementById('location').value, cuisine = document.getE
 let hcuisine = localStorage.getItem('hcuisine')
 let hlocation = localStorage.getItem('hlocation')
 
+// if there is a search made on another page, show results based on that
 $(document).ready(function () {
-
-  console.log(localStorage.getItem('hcuisine'))
-
   if (hcuisine !== null) {
     cuisine = hcuisine
     zipcode = hlocation
     getYelp()
     getSpoon()
+    localStorage.removeItem(hcuisine)
+    localStorage.removeItem(hlocation)
   } else {
+    // otherwise, show results based on 
     cuisine = document.getElementById('cuisine').value
     zipcode = document.getElementById('location').value
   }
@@ -198,3 +199,9 @@ document.addEventListener('click', event => {
     $(event.target).text('bookmark')
   }
 })
+
+$("#location").keyup(function (event) {
+  if (event.keyCode === 13) {
+    $("#search").click();
+  }
+});

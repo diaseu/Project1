@@ -10,3 +10,9 @@ document.getElementById('hsearch').addEventListener('click', event => {
   populateStorage()
   window.location.replace("search.html")
 })
+
+$("#hlocation").keyup(function (event) {
+  if (event.keyCode === 13) {
+    $("#hsearch").click();
+  }
+});
