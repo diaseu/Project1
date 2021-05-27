@@ -5,50 +5,64 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OUTIN - project01 : favorites</title>
-  <!-- CSS Stylesheets -->
+  <title>Project 1</title>
   <link rel="stylesheet" href="./Assets/css/reset.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="stylesheet" href="./Assets/css/style.css">
 </head>
-
 <body>
-  <header>
+
+<header>
   <nav class="teal darken-2 row">
-    <div class="col s6 m4 caps brand"><span class="material-icons">local_dining</span> <a href="index.html" onclick="location.replace('index.html'),'_top'"><span class="accent2">Out</span><span class="accent">in</span></a></div>
+    <div class="col s6 m4 caps brand"><span class="material-icons">local_dining</span> <a href="index.html" onclick="location.replace('index.html'),'_top'"><span
+          class="accent2">Out</span><span class="accent">in</span></a></div>
     <!-- Need Navbar-Brand -->
     <!-- Need Cuisine type input -->
     <div class="col s12 m2">
-      <input id="hcuisine" type="text" class="" placeholder="Type of Cuisine">
+      <input id="cuisine" type="text" class="" placeholder="Type of Cuisine">
     </div>
     <!-- Need Location input -->
     <div class="col s12 m2">
-      <input id="hlocation" type="text" class="" placeholder="City, State or Zipcode">
+      <input id="location" type="text" class="" placeholder="City, State or Zipcode">
     </div>
     <!-- Need Search Button -->
     <div class="col s12 m1">
-      <button class="btn waves-effect waves-light" id="hsearch">Search</button>
+      <button class="btn waves-effect waves-light" id="search">Search</button>
     </div>
     <!-- Need Favorites page link -->
     <div class="col s12 m1 offset-m2 padding-sides">
       <a href="favorites.html" class="right" onclick="location.replace('favorites.html'),'_top'">Favorites</a>
     </div>
   </nav>
-  </header>
+</header>
 
-  <main id="main">
-    <div class="row">
-      <div id="favRest" class="col s12 m6">
+  <main class="container">
+    <div id="main" hidden class="row">
+      <!-- Restaurants side -->
+      <div class="col s12 m6">
         <div class="mt-3 small caps">Eat Out</div>
-        <h1 id="restaurantTitle" class="mt-0 mb-6">Bookmarked Restaurants</h1>
+        <h1 id="restaurantTitle" class="mt-0 mb-6">Restaurants</h1>
 
+        <!-- Restaurant Results  -->
+        <div id="restaurantResults">
+
+        </div>
+      <!-- End of Restaurant Side -->
       </div>
-      <div id="favRec" class="col s12 m6">
+
+      <!-- Recipes side -->
+      <div class="col s12 m6">
         <div class="mt-3 small caps">Eat In</div>
-        <h1 id="recipeTitle" class="mt-0 mb-6">Bookmarked Recipes</h1>
+        <h1 id="recipeTitle" class="mt-0 mb-6">Recipes</h1>
 
+        <!-- Recipes Results  -->
+        <div id="recipeResults">
+
+        </div>
+      <!-- End of Recipe Side -->
       </div>
+
     </div>
   </main>
 
@@ -80,11 +94,12 @@
         </div>
       </div>
     </footer>
-=======
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <script src="./Assets/js/favorites.js"></script>
-  <script src="./Assets/js/search.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="./Assets/js/script.js"></script>
 </body>
+</html>
