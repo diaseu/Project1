@@ -126,7 +126,7 @@ function getSpoon() {
                     <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
                   </div>
                 </div>
-                `   
+                `
             var elems = document.querySelectorAll('.modal');
             var instances = M.Modal.init(elems, {})
             // add ingredients to the modal 
