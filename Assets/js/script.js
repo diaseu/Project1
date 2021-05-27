@@ -80,6 +80,7 @@ function getYelp() {
 function getSpoon() {
   axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=${cuisine}&apiKey=390ebfa488364e6496ce8853bd9bb10d`)
     .then(({ data }) => {
+      console.log(data)
       for (let i = 0; i < 5; i++) {
         let recId = data.results[i].id
         axios.get(`https://api.spoonacular.com/recipes/${recId}/information?apiKey=390ebfa488364e6496ce8853bd9bb10d&includeNutrition=true`)
