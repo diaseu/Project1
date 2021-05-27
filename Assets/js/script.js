@@ -196,8 +196,22 @@ document.addEventListener('click', event => {
 document.addEventListener('click', event => {
   event.preventDefault()
   if (event.target.classList.contains('addToFavoritesRest')) {
-    addToFaveRests(event.target.dataset.name, event.target.dataset.address, event.target.dataset.img, event.target.dataset.phone, event.target.dataset.rating, event.target.dataset.price)
-    $(event.target).text('bookmark')
+    if (event.target.textContent === 'bookmark') {
+      let favs = JSON.parse(localStorage.getItem('favRest'))
+      for (let i = 0; i < favs.length; i++) {
+        if (favs[i].restAddress === event.target.dataset.address) {
+          if (i > -1) {
+            favs.splice(i, 1)
+          }
+        }
+      }
+      localStorage.setItem('favRest', JSON.stringify(favs))
+      event.target.textContent = 'bookmark_border'
+    }
+    else {
+      addToFaveRests(event.target.dataset.name, event.target.dataset.address, event.target.dataset.img, event.target.dataset.phone, event.target.dataset.rating, event.target.dataset.price)
+      $(event.target).text('bookmark')
+    }
   }
 })
 
