@@ -78,14 +78,15 @@ function getYelp() {
 }
 
 function getSpoon() {
-  axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=${cuisine}&apiKey=88c16747eb4f4b118f16730d6389e718`)
+  axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=${cuisine}&apiKey=8f5b3f3b103643d88ebc4def081beb88`)
     .then(({ data }) => {
       console.log(data)
       for (let i = 0; i < 5; i++) {
         let recId = data.results[i].id
-        axios.get(`https://api.spoonacular.com/recipes/${recId}/information?apiKey=88c16747eb4f4b118f16730d6389e718&includeNutrition=true`)
+        axios.get(`https://api.spoonacular.com/recipes/${recId}/information?apiKey=8f5b3f3b103643d88ebc4def081beb88&includeNutrition=true`)
           .then(res => {
-            let price = Math.round(100 * (res.data.pricePerServing / 100)) / 100, imgSrc = res.data.image, recipe = res.data.instructions, time = res.data.readyInMinutes, glutenFree = res.data.glutenFree ? true : false, glutenFreeDisplay = ''
+            let price = Math.round(100 * (res.data.pricePerServing / 100)) / 100, imgSrc = res.data.image, recipe = res.data.instructions, time = res.data.readyInMinutes, glutenFree = res.data.glutenFree ? true : false, glutenFreeDisplay = '', ingredients = res.data.analyzedInstructions[0].steps
+            console.log(res.data.analyzedInstructions[0].steps)
             if (glutenFree) {
               glutenFreeDisplay = '✅'
             }
@@ -118,6 +119,7 @@ function getSpoon() {
                   <div class="modal-content">
                     <h4>${res.data.title}</h4>
                     <p>${res.data.instructions}</p>
+                    <p id="ingredients${i}">Ingredients:</p>
                   </div>
                   <div class="modal-footer">
                     <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
@@ -126,6 +128,9 @@ function getSpoon() {
                 `
             var elems = document.querySelectorAll('.modal');
             var instances = M.Modal.init(elems, {})
+            for(let j=0;j<ingredients.length;j++) {
+              for(let p=0; p<ingredients[j].ingredients.length; p++){
+              $(`#ingredients${i}`).append(ingredients[j].ingredients[p].name + ',  ')}}
           })
           .catch(err => console.error(err))
 
