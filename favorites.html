@@ -148,5 +148,12 @@
             localStorage.setItem('favRest', JSON.stringify(favs))
           }
       })
+      document.addEventListener('click', event => {
+          if (event.target.className === 'modal-trigger') {
+            let instance = M.Modal.getInstance(document.querySelector(event.target.dataset.target))
+            instance.open()
+            console.log(event.target.dataset.target)
+          }
+        })
   </script>
 </body>
