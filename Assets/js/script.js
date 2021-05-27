@@ -118,8 +118,9 @@ function getSpoon() {
                 <div id="recipe${i}" class="modal modal-fixed-footer">
                   <div class="modal-content">
                     <h4>${res.data.title}</h4>
-                    <ul id="ingredients${i}">Ingredients: </ul>
-                    <p>${res.data.instructions}</p>
+                    <img src="${imgSrc}" class="responsive-img" alt="${res.data.title}">
+                    <ul id="ingredients${i}"> <b>Ingredients: </b></ul>
+                    <p><b>Instructions: </b>${res.data.instructions}</p>
                   </div>
                   <div class="modal-footer">
                     <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
@@ -131,7 +132,7 @@ function getSpoon() {
             // add ingredients to the modal 
             for(let j=0;j<ingredients.length;j++) {
               for(let p=0; p<ingredients[j].ingredients.length; p++){
-                $(`#ingredients${i}`).append(`<li>${ingredients[j].number} x ${ingredients[j].ingredients[p].name}</li>`)}}
+                $(`#ingredients${i}`).append(`<li>${ingredients[j].number} unit ${ingredients[j].ingredients[p].name}</li>`)}}
           })
           .catch(err => console.error(err))
 
