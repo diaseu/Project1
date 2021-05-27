@@ -1,4 +1,4 @@
-let favorites = JSON.parse(localStorage.getItem('favRec'))
+let favorites = JSON.parse(localStorage.getItem('favRec')) || []
 for (i = 0; i < favorites.length; i++) {
   axios.get(`https://api.spoonacular.com/recipes/${favorites[i]}/information?apiKey=88c16747eb4f4b118f16730d6389e718&includeNutrition=true`)
     .then(res => {
@@ -48,7 +48,7 @@ for (i = 0; i < favorites.length; i++) {
     .catch(err => console.error(err))
 }
 
-let favoriteRests = JSON.parse(localStorage.getItem('favRest'))
+let favoriteRests = JSON.parse(localStorage.getItem('favRest')) || []
 for (let i = 0; i < favoriteRests.length; i++) {
   document.getElementById('favRest').innerHTML += `
         
