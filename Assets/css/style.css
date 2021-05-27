@@ -7,6 +7,11 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  background-color: #fae3d9;
+}
+
+#restaurantTitle, #recipeTitle {
+  font-weight: 600;
 }
 
 main {
@@ -14,7 +19,7 @@ main {
 }
 
 .homeCard p {
-  font-size: 36px;
+  font-size: 28px;
   line-height: 130%;
   max-width: 80%;
   margin: 0 auto;
