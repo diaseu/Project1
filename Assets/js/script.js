@@ -118,19 +118,20 @@ function getSpoon() {
                 <div id="recipe${i}" class="modal modal-fixed-footer">
                   <div class="modal-content">
                     <h4>${res.data.title}</h4>
+                    <ul id="ingredients${i}">Ingredients: </ul>
                     <p>${res.data.instructions}</p>
-                    <p id="ingredients${i}">Ingredients:</p>
                   </div>
                   <div class="modal-footer">
                     <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
                   </div>
                 </div>
-                `
+                `   
             var elems = document.querySelectorAll('.modal');
             var instances = M.Modal.init(elems, {})
+            // add ingredients to the modal 
             for(let j=0;j<ingredients.length;j++) {
               for(let p=0; p<ingredients[j].ingredients.length; p++){
-              $(`#ingredients${i}`).append(ingredients[j].ingredients[p].name + ',  ')}}
+                $(`#ingredients${i}`).append(`<li>${ingredients[j].number} x ${ingredients[j].ingredients[p].name}</li>`)}}
           })
           .catch(err => console.error(err))
 
