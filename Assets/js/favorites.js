@@ -1,5 +1,6 @@
 let favorites = JSON.parse(localStorage.getItem('favRec')) || []
-for (i = 0; i < favorites.length; i++) {
+
+const renderRecipe = (favorites, i) => {
   axios.get(`https://api.spoonacular.com/recipes/${favorites[i]}/information?apiKey=6b48943360174ad8a6455e7ba6480c4c&includeNutrition=true`)
     .then(res => {
       let price = Math.round(100 * (res.data.pricePerServing / 100)) / 100, imgSrc = res.data.image, recipe = res.data.instructions, time = res.data.readyInMinutes, glutenFree = res.data.glutenFree ? true : false, glutenFreeDisplay = '', ingredients = res.data.extendedIngredients
@@ -44,19 +45,81 @@ for (i = 0; i < favorites.length; i++) {
               </div>
             </div>
             `
-      if (i==favorites.length){ 
-        console.log('all')
+            
+            // add ingredients to the modal 
+            for (let j = 0; j < ingredients.length; j++) {
+              $(`#ingredients${i}`).append(`<li>${ingredients[j].original}</li>`)
+            }
+            
+            if (i < favorites.length - 1) {
+              renderRecipe(favorites, i + 1)
+            } else  {
+              console.log('attached')
         var elems = document.querySelectorAll('.modal')
-        console.log(elems)
         var instances = M.Modal.init(elems, {})
-      }
-      // add ingredients to the modal 
-      for (let j = 0; j < ingredients.length; j++) {
-        $(`#ingredients${i}`).append(`<li>${ingredients[j].original}</li>`)
       }
     })
     .catch(err => console.error(err))
 }
+
+renderRecipe(favorites, 0)
+
+// for (i = 0; i < favorites.length; i++) {
+//   axios.get(`https://api.spoonacular.com/recipes/${favorites[i]}/information?apiKey=6b48943360174ad8a6455e7ba6480c4c&includeNutrition=true`)
+//     .then(res => {
+//       let x=i 
+//       let price = Math.round(100 * (res.data.pricePerServing / 100)) / 100, imgSrc = res.data.image, recipe = res.data.instructions, time = res.data.readyInMinutes, glutenFree = res.data.glutenFree ? true : false, glutenFreeDisplay = '', ingredients = res.data.extendedIngredients
+//       console.log(ingredients)
+//       if (glutenFree) {
+//         glutenFreeDisplay = '✅'
+//       }
+//       else {
+//         glutenFreeDisplay = '❌'
+//       }
+//       document.getElementById('favRec').innerHTML += `
+//           <div class="col s12 m11">
+//             <div class="card horizontal">
+//               <div class="card-image">
+//                 <img src="${imgSrc}" class="responsive-img" alt="${res.data.title}">
+//               </div>
+//               <div class="card-stacked">
+//                 <div class="card-content">
+//                   <h4 class="header">${res.data.title}</h4>
+//                   <p><strong>Gluten-Free</strong>: ${glutenFreeDisplay}</p>
+//                   <p><strong>Servings</strong>: ${res.data.servings}</p>
+//                   <p><strong>Price</strong>: $${price}/serving</p>
+//                 </div>
+//                 <div class="card-action">
+//                   <a href="#recipe${i}" data-target="recipe${i}" class="modal-trigger">See Recipe</a>
+//                   <a href=""><span data-value="${res.data.id}" class="material-icons right addToFavoritesRecipe">bookmark_remove</span></a>
+
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+                    
+//             <div id="recipe${x}" class="modal modal-fixed-footer">
+//               <div class="modal-content">
+//                 <h4>${res.data.title}</h4>
+//                 <img src="${imgSrc}" class="responsive-img" alt="${res.data.title}">
+//                 <ul id="ingredients${i}"> <b>Ingredients: </b></ul>
+//                 <p><b>Instructions: </b>${res.data.instructions}</p>
+//               </div>
+//               <div class="modal-footer">
+//                 <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+//               </div>
+//             </div>
+//             `
+//         var elems = document.querySelectorAll('.modal')
+//         var instances = M.Modal.init(elems, {})
+      
+//       // add ingredients to the modal 
+//       for (let j = 0; j < ingredients.length; j++) {
+//         $(`#ingredients${i}`).append(`<li>${ingredients[j].original}</li>`)
+//       }
+//     })
+//     .catch(err => console.error(err))
+// }
 
 let favoriteRests = JSON.parse(localStorage.getItem('favRest')) || []
 for (let i = 0; i < favoriteRests.length; i++) {
