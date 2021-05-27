@@ -78,15 +78,15 @@ function getYelp() {
 }
 
 function getSpoon() {
-  axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=${cuisine}&apiKey=fe6cba05576c4d7ca753b844013fecbe`)
+  axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=${cuisine}&apiKey=6b48943360174ad8a6455e7ba6480c4c`)
     .then(({ data }) => {
       console.log(data)
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < 1; i++) {
         let recId = data.results[i].id
-        axios.get(`https://api.spoonacular.com/recipes/${recId}/information?apiKey=fe6cba05576c4d7ca753b844013fecbe&includeNutrition=true`)
+        axios.get(`https://api.spoonacular.com/recipes/${recId}/information?apiKey=6b48943360174ad8a6455e7ba6480c4c&includeNutrition=true`)
           .then(res => {
-            let price = Math.round(100 * (res.data.pricePerServing / 100)) / 100, imgSrc = res.data.image, recipe = res.data.instructions, time = res.data.readyInMinutes, glutenFree = res.data.glutenFree ? true : false, glutenFreeDisplay = '', ingredients = res.data.analyzedInstructions[0].steps
-            console.log(res.data.analyzedInstructions[0].steps)
+            let price = Math.round(100 * (res.data.pricePerServing / 100)) / 100, imgSrc = res.data.image, recipe = res.data.instructions, time = res.data.readyInMinutes, glutenFree = res.data.glutenFree ? true : false, glutenFreeDisplay = '', ingredients = res.data.extendedIngredients
+            console.log(ingredients)
             if (glutenFree) {
               glutenFreeDisplay = '✅'
             }
@@ -118,8 +118,9 @@ function getSpoon() {
                 <div id="recipe${i}" class="modal modal-fixed-footer">
                   <div class="modal-content">
                     <h4>${res.data.title}</h4>
-                    <ul id="ingredients${i}">Ingredients: </ul>
-                    <p>${res.data.instructions}</p>
+                    <img src="${imgSrc}" class="responsive-img" alt="${res.data.title}">
+                    <ul id="ingredients${i}"> <b>Ingredients: </b></ul>
+                    <p><b>Instructions: </b>${res.data.instructions}</p>
                   </div>
                   <div class="modal-footer">
                     <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
@@ -129,11 +130,8 @@ function getSpoon() {
             var elems = document.querySelectorAll('.modal');
             var instances = M.Modal.init(elems, {})
             // add ingredients to the modal 
-            for (let j = 0; j < ingredients.length; j++) {
-              for (let p = 0; p < ingredients[j].ingredients.length; p++) {
-                $(`#ingredients${i}`).append(`<li>${ingredients[j].number} x ${ingredients[j].ingredients[p].name}</li>`)
-              }
-            }
+            for(let j=0;j<ingredients.length;j++) {
+              $(`#ingredients${i}`).append(`<li>${ingredients[j].original}</li>`)}
           })
           .catch(err => console.error(err))
 
@@ -196,8 +194,24 @@ function addToFaveRests(restName, restAddress, imgSrc, phone, rating, price) {
 document.addEventListener('click', event => {
   event.preventDefault()
   if (event.target.classList.contains('addToFavoritesRecipe')) {
+    if (event.target.textContent === 'bookmark') {
+      let favs = JSON.parse(localStorage.getItem('favRec'))
+      console.log(event.target.dataset.value)
+      function removeItemOnce(arr, value) {
+        var index = arr.indexOf(value);
+        if (index > -1) {
+          arr.splice(index, 1);
+        }
+        return arr;
+      }
+      favs = removeItemOnce(favs, event.target.dataset.value)
+      localStorage.setItem('favRec', JSON.stringify(favs))
+      event.target.textContent = 'bookmark_border'
+    }
+    else {
     addToFavs(event.target.dataset.value)
     $(event.target).text('bookmark')
+  }
   }
 })
 

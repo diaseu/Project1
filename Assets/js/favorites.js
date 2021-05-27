@@ -1,8 +1,9 @@
 let favorites = JSON.parse(localStorage.getItem('favRec')) || []
 for (i = 0; i < favorites.length; i++) {
-  axios.get(`https://api.spoonacular.com/recipes/${favorites[i]}/information?apiKey=fe6cba05576c4d7ca753b844013fecbe&includeNutrition=true`)
+  axios.get(`https://api.spoonacular.com/recipes/${favorites[i]}/information?apiKey=6b48943360174ad8a6455e7ba6480c4c&includeNutrition=true`)
     .then(res => {
-      let price = Math.round(100 * (res.data.pricePerServing / 100)) / 100, imgSrc = res.data.image, recipe = res.data.instructions, time = res.data.readyInMinutes, glutenFree = res.data.glutenFree ? true : false, glutenFreeDisplay = ''
+      let price = Math.round(100 * (res.data.pricePerServing / 100)) / 100, imgSrc = res.data.image, recipe = res.data.instructions, time = res.data.readyInMinutes, glutenFree = res.data.glutenFree ? true : false, glutenFreeDisplay = '', ingredients = res.data.extendedIngredients
+      console.log(ingredients)
       if (glutenFree) {
         glutenFreeDisplay = '✅'
       }
@@ -23,7 +24,7 @@ for (i = 0; i < favorites.length; i++) {
                   <p><strong>Price</strong>: $${price}/serving</p>
                 </div>
                 <div class="card-action">
-                  <a href="#" data-target="#recipe${i}" class="modal-trigger">See Recipe</a>
+                  <a href="#recipe${i}" data-target="recipe${i}" class="modal-trigger">See Recipe</a>
                   <a href=""><span data-value="${res.data.id}" class="material-icons right addToFavoritesRecipe">bookmark_remove</span></a>
 
                 </div>
@@ -34,16 +35,25 @@ for (i = 0; i < favorites.length; i++) {
             <div id="recipe${i}" class="modal modal-fixed-footer">
               <div class="modal-content">
                 <h4>${res.data.title}</h4>
-                <p>${res.data.instructions}</p>
+                <img src="${imgSrc}" class="responsive-img" alt="${res.data.title}">
+                <ul id="ingredients${i}"> <b>Ingredients: </b></ul>
+                <p><b>Instructions: </b>${res.data.instructions}</p>
               </div>
               <div class="modal-footer">
                 <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
               </div>
             </div>
             `
-      console.log(res.data)
-      var elems = document.querySelectorAll('.modal');
-      var instances = M.Modal.init(elems, {})
+      if (i==favorites.length){ 
+        console.log('all')
+        var elems = document.querySelectorAll('.modal')
+        console.log(elems)
+        var instances = M.Modal.init(elems, {})
+      }
+      // add ingredients to the modal 
+      for (let j = 0; j < ingredients.length; j++) {
+        $(`#ingredients${i}`).append(`<li>${ingredients[j].original}</li>`)
+      }
     })
     .catch(err => console.error(err))
 }
