@@ -1,6 +1,6 @@
 let favorites = JSON.parse(localStorage.getItem('favRec')) || []
 for (i = 0; i < favorites.length; i++) {
-  axios.get(`https://api.spoonacular.com/recipes/${favorites[i]}/information?apiKey=8f5b3f3b103643d88ebc4def081beb88&includeNutrition=true`)
+  axios.get(`https://api.spoonacular.com/recipes/${favorites[i]}/information?apiKey=d3776935326b42dd81338d1151d0e183&includeNutrition=true`)
     .then(res => {
       let price = Math.round(100 * (res.data.pricePerServing / 100)) / 100, imgSrc = res.data.image, recipe = res.data.instructions, time = res.data.readyInMinutes, glutenFree = res.data.glutenFree ? true : false, glutenFreeDisplay = ''
       if (glutenFree) {
