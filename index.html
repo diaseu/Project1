@@ -5,156 +5,147 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Project 1</title>
-  <link rel="stylesheet" href="./Assets/reset.css">
+  <title>OUTIN - project01 : home</title>
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="./Assets/css/reset.css">
+  <!-- <link rel="stylesheet" href="./Assets/css/bootstrap-min.css">
+  <link rel="stylesheet" href="./Assets/css/bootstrap-theme.min.css"> -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <link rel="stylesheet" href="./Assets/style.css">
+  <link rel="stylesheet" href="./Assets/css/style.css">
 </head>
+
 <body>
+  <header>
+    <nav class="teal darken-2 row">
+    <!-- Navbar-Brand -->
+          <div class="col s6 m4 caps brand"><span class="material-icons">local_dining</span> <a href="index.html" class="hide-on-med-and-down" onclick="location.replace('index.html'),'_top'"><span class="accent2">Out</span><span class="accent">in</span></a></div>
+    <!-- Mobile Hamburger -->
+    <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
+    <ul class="sidenav" id="mobile-demo">
+      <li><a href="search.html"><i class="material-icons">search</i> Search</a></li>
+      <li><a href="favorites.html"><i class="material-icons">bookmarks</i> Favorites</a></li>
+    </ul>
+    <!-- Cuisine type input -->
+      <div class="col s12 m2 hide-on-med-and-down">
+        <input id="hcuisine" type="text" class="" placeholder="Type of Cuisine">
+      </div>
+    <!-- Location input -->
+      <div class="col s12 m2 hide-on-med-and-down">
+        <input id="hlocation" type="text" class="" placeholder="City, State or Zipcode">
+      </div>
+    <!-- Search Button -->
+      <div class="col s12 m1 hide-on-med-and-down">
+        <button class="btn waves-effect waves-light" id="hsearch">Search</button>
+      </div>
+    <!-- Favorites page link -->
+    <ul class="right hide-on-med-and-down">
+      <li><a href="favorites.html" class="right" onclick="location.replace('favorites.html'),'_top'">Favorites</a></li>
+    </ul>
+    </nav>
+  </header>
 
-<header>
-  <nav class="teal darken-2 row">
-    <div class="col s6 m2"><span class="material-icons">local_dining</span> Project 1</div>
-  <!-- Need Navbar-Brand -->
-  <!-- Need Cuisine type input -->
-    <div class="col s12 m3">
-      <input id="cuisine" type="text" class="" placeholder="type of cuisine">
+<div class="section no-pad-bot" id="index-banner">
+  <div class="container">
+    <h1 class="header center teal-text lighten-2-text hide-on-med-and-down"><span class="material-icons big">local_dining</span></h1>
+    <div class="row center">
+      <h5 class="header col s12 light"><strong class="caps">Eat <b class="accent2">out</b></strong> or <strong class="caps">eat <b class="accent">in</b></strong>?</h5>
     </div>
-  <!-- Need Location input -->
-    <div class="col s12 m3">
-      <input id="location" type="text" class="" placeholder="City, State or Zipcode">
+    <div class="row center hide-on-med-and-down">
+      <a href="#homeMain" id="download-button" class="waves-effect waves-light teal-text"><span class="material-icons">expand_more</span></a>
     </div>
-  <!-- Need Search Button -->
-    <div class="col s12 m1">
-      <button id="search">Search</button>
-    </div>
-  <!-- Need Favorites page link -->
-    <div class="col s12 m1 offset-m2">
-      <a href="favorites.html" class="right">Favorites</a>
-    </div>
-  </nav>
-</header>
+    <br><br>
 
-  <main class="container">
+  </div>
+</div>
+
+
+<main id="homeMain" class="container">
+  <div class="section">
+
+    <!--   Icon Section   -->
     <div class="row">
-      <!-- Restaurants side -->
-      <div class="col s12 m6">
-        <div class="mt-3 small caps">Eat Out</div>
-        <h1 id="restaurantTitle" class="mt-0 mb-6">Restaurants go here</h1>
-
-        <!-- Restaurant Results  -->
-        <div id="restaurantResults">
-          <!-- Sample Result Item #1 -->
-          <div class="row mt-3">
-            <div class="col s3">
-              <img src="https://dummyimage.com/200x200/666/fff.jpg&text=rest" >
-            </div>
-            <div class="col s9">
-              <h3>Restaurant 1</h2>
-              <p>Rating: # (# reviews)</p>
-              <p class="mb-3">Price: $</p>
-
-              <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit, corrupti maxime iste esse possimus sint accusamus beatae sit distinctio odio sed neque rem reprehenderit quo quae fuga vero nesciunt. Et?</p>
-            </div>
-          </div>
-          <!-- Sample Result Item #2 -->
-          <div class="row mt-3">
-            <div class="col s3">
-              <img src="https://dummyimage.com/200x200/999/fff.jpg&text=rest">
-            </div>
-            <div class="col s9">
-              <h3>Restaurant 2</h2>
-                <p>Rating: # (# reviews)</p>
-                <p class="mb-3">Price: $</p>
-          
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit, corrupti maxime iste esse possimus sint
-                  accusamus beatae sit distinctio odio sed neque rem reprehenderit quo quae fuga vero nesciunt. Et?</p>
-            </div>
-          </div>
-          <!-- Sample Result Item #3 -->
-          <div class="row mt-3">
-            <div class="col s3">
-              <img src="https://dummyimage.com/200x200/666/fff.jpg&text=rest">
-            </div>
-            <div class="col s9">
-              <h3>Restaurant 3</h2>
-                <p>Rating: # (# reviews)</p>
-                <p class="mb-3">Price: $</p>
-
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit, corrupti maxime iste esse possimus sint
-                  accusamus beatae sit distinctio odio sed neque rem reprehenderit quo quae fuga vero nesciunt. Et?</p>
-            </div>
-          </div>
-
-        <!-- End of Restaurant Results -->
-      </div>
-      <!-- End of Restaurant Side -->
-      </div>
-
-      <!-- Recipes side -->
-      <div class="col s12 m6">
-        <div class="mt-3 small caps">Eat In</div>
-        <h1 id="recipeTitle" class="mt-0 mb-6">Recipes go here</h1>
-
-        <!-- Recipes Results  -->
-        <div id="recipeResults">
-        <!-- Sample Result Item #1 -->
-        <div class="row mt-3">
-          <div class="col s3">
-            <img src="https://dummyimage.com/200x200/999/fff.jpg&text=recipe">
-          </div>
-          <div class="col s9">
-            <h3>Recipe 1</h2>
-              <p>Rating: # (# reviews)</p>
-              <p class="mb-3">Price: $1.05/serving</p>
-        
-              <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit, corrupti maxime iste esse possimus sint
-                accusamus beatae sit distinctio odio sed neque rem reprehenderit quo quae fuga vero nesciunt. Et?</p>
+      <div class="col s12 m4">
+        <div class="card">
+          <div class="card-image">
+            <img class="activator" src="./Assets/img/cook1.jpg">
           </div>
         </div>
-        <!-- Sample Result Item #2 -->
-        <div class="row mt-3">
-          <div class="col s3">
-            <img src="https://dummyimage.com/200x200/666/fff.jpg&text=recipe">
-          </div>
-          <div class="col s9">
-            <h3>Recipe 2</h2>
-              <p>Rating: # (# reviews)</p>
-              <p class="mb-3">Price: $1.05/serving</p>
-        
-              <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit, corrupti maxime iste esse possimus sint
-                accusamus beatae sit distinctio odio sed neque rem reprehenderit quo quae fuga vero nesciunt. Et?</p>
-          </div>
-        </div>
-        <!-- Sample Result Item #3 -->
-        <div class="row mt-3">
-          <div class="col s3">
-            <img src="https://dummyimage.com/200x200/999/fff.jpg&text=recipe">
-          </div>
-          <div class="col s9">
-            <h3>Recipe 3</h2>
-              <p>Rating: # (# reviews)</p>
-              <p class="mb-3">Price: $1.05/serving</p>
-        
-              <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit, corrupti maxime iste esse possimus sint
-                accusamus beatae sit distinctio odio sed neque rem reprehenderit quo quae fuga vero nesciunt. Et?</p>
-          </div>
-        </div>
-
-      <!-- End of Recipe Results -->
-      </div>
-      <!-- End of Recipe Side -->
       </div>
 
+      <div class="col s12 m4 hide-on-med-and-down">
+        <div class="card">
+          <div class="card-image">
+            <img class="activator" src="./Assets/img/eatout1.jpg">
+          </div>
+        </div>
+      </div>
+
+      <div class="col s12 m4 hide-on-med-and-down">
+        <div class="card">
+          <div class="card-image">
+            <img class="activator" src="./Assets/img/cook2.jpg">
+          </div>
+
+        </div>
+      </div>
     </div>
-  </main>
+
+    <div class="row mt-3">
+      <div class="col s12 m12">
+      <div class="card-content homeCard">
+        <span class="card-title activator grey-text text-darken-4">
+          <h5 class="caps center"><strong class="accent2">Out<span class="accent">in</span></strong></h5>
+          <p>People have wondered for the longest time whether they should eat out (dining out a restaurant) or eat in (cook
+          and prepare their own food at home). Our site aims to solve that problem. Using our search feature, you can easily
+          decide between eating in/out. Powered by Yelp and Spoonacular, a list of restaurants and recipes are readily available
+          at your fingertips! Finally, no more dealing with the hard pressed decision of where to put food in your stomach and
+          more time spent deliberating about other things, like finances!</p>
+      </div>
+      </div>
+    </div>
+
+  </div>
+  <br><br>
+</main>
+
+  <footer class="page-footer teal darken-2">
+    <div class="container">
+      <div class="row">
+        <div class="col l3 m3 s12">
+          <h5 class="caps brand accent2 mb-3">Out<span class="accent">in</span></h5>
+          <p class="grey-text text-lighten-4"><strong>Application to search both local restaurant options (eat out) and recipes options (eat in).</strong><br /><br />Project name is based on the word 'outing' (trip taken for pleasure) and "eating out" (eating at a restaurant) vs "eating in" (cooking at home). </p>
+          <div class="spacer"></div>
+        </div>
+        <div class="col l4 offset-l5 s12">
+          <h5 class="white-text mt-3">Site Map</h5>
+          <ul class="doublespaced">
+            <li><a class="grey-text text-lighten-3" href="index.html" onclick="location.replace('index.html'),'_top'">Home</a></li>
+            <li><a class="grey-text text-lighten-3" href="search.html" onclick="location.replace('search.html'),'_top'">Search</a></li>
+            <li><a class="grey-text text-lighten-3" href="favorites.html" onclick="location.replace('favorites.html'),'_top'">Favorites</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="right pad-sides">&copy; 2021 <a href="http://www.github.com/armin-ch">Armin C.</a> & <a href="http://www.github.com/DeviantSchemist1">Michael N.</a> & <a href="http://www.github.com/diaseu">Dia S.</a></div>
+      </div>
+    </div>
+  </footer>
 
 
-
-
+  <!-- <script src="./Assets/js/bootstrap.min.js"></script> -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="./Assets/script.js"></script>
+  <!-- <script src="./Assets/script.js"></script> -->
+  <script src="./Assets/js/search.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var elems = document.querySelectorAll('.sidenav');
+      var instances = M.Sidenav.init(elems, {edge: 'right'});
+    });
+  </script>
 </body>
 </html>
